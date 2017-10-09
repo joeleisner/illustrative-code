@@ -1,0 +1,26 @@
+{
+  "name": "creative-sprint-october-2017",
+  "version": "1.0.0",
+  "description": "A repo containing all web related #creativesprint prompts",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeleisner/creative-sprint-october-2017.git"
+  },
+  "author": "Joel Eisner <jeisner93@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joeleisner/creative-sprint-october-2017/issues"
+  },
+  "homepage": "https://github.com/joeleisner/creative-sprint-october-2017#readme",
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "cssnano": "^3.10.0",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  }
+}

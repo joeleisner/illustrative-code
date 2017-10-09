@@ -1,0 +1,43 @@
+// Anvil - Partials
+
+#anvil
+    display: flex
+    width: 180px
+    height: 80px
+
+    .horn
+        width: 0
+        height: 0
+        margin-top: 10px
+        border-top: 20px solid $white
+        border-left: 60px solid transparent
+
+    .body
+        position: relative
+        width: 120px
+        height: 80px
+        background-color: $white
+        overflow: hidden
+
+        [class$='-cutout']
+            position: absolute
+            border-radius: 100%
+            background-color: $slate
+
+        .right-cutout
+            top: 10px
+            right: -30px
+            width: 60px
+            height: 60px
+
+        .bottom-cutout
+            bottom: -15px
+            left: 45px
+            width: 30px
+            height: 30px
+
+        .left-cutout
+            top: 30px
+            left: -30px
+            width: 60px
+            height: 40px
