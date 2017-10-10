@@ -24,6 +24,7 @@ Make something representing the origins or meanings of your name. My last name i
 ## Setup
 To set this project up, make sure you have the following:
 * Node.js 6.4 or higher
+* NPM 5.X
 * Gulp installed globally: `$ npm i -g gulp`
 
 ### Install
