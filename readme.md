@@ -1,5 +1,5 @@
 # Creative Sprint - October 2017
-This repo contains all web related #creativesprint prompts for October 2017. Days that are not listed below (e.g. were not web related) can be found on my following social media profiles:
+This repo contains all web related [#creativesprint](https://www.instagram.com/explore/tags/creativesprint/) prompts for October 2017. Days that are not listed below (e.g. were not web related) can be found on my following social media profiles:
 * [Twitter](https://twitter.com/joeleisner)
 * [Instagram](https://www.instagram.com/joeleisner/)
 
