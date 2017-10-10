@@ -1,7 +1,7 @@
 {
   "name": "creative-sprint-october-2017",
   "version": "1.0.0",
-  "description": "A repo containing all web related #creativesprint prompts",
+  "description": "A repo containing all web related #creativesprint prompts of Joel Eisner for October 2017",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
