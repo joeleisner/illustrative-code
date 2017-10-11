@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 11](http://www.joeleisner.com/creative-sprint/day-11)
+Work together with another Creative Sprinter, today. Unfortunately, I don't know anyone else who I could collaborate with, but that didn't stop me! I got some feedback from folks, and decided to build another HTML/CSS loader with a bouncy-ball wave.
+
 ### [Day 9](http://www.joeleisner.com/creative-sprint/day-9)
 Today is World Post Day! Create something inspired by the Postal Service and their work. I built a mailbox with an animated mailbox flag with HTML/CSS.
 
