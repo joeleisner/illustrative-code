@@ -1,0 +1,45 @@
+// Loader - Partials
+
+@keyframes bounce
+    from, 30%, 45%, 55%, 65%, to
+        animation-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1)
+        transform: translateY(0)
+
+    35%, 40%
+        animation-timing-function: cubic-bezier(0.7, 0.1, 0.9, 0.1)
+        transform: translateY(-90px)
+
+    50%
+        animation-timing-function: cubic-bezier(0.7, 0.1, 0.9, 0.1)
+        transform: translateY(-45px)
+
+    60%
+        transform: translateY(-15px)
+
+#loader
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 180px
+    height: 10px
+    z-index: 1
+
+    .dot
+        width: 10px
+        height: 10px
+        border-radius: 5px
+        animation: bounce 3s infinite
+        &:nth-child(1)
+            background-color: $red
+        &:nth-child(2)
+            background-color: $orange
+            animation-delay: 0.1s
+        &:nth-child(3)
+            background-color: $yellow
+            animation-delay: 0.2s
+        &:nth-child(4)
+            background-color: $green
+            animation-delay: 0.3s
+        &:nth-child(5)
+            background-color: $blue
+            animation-delay: 0.4s
