@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 12](http://www.joeleisner.com/creative-sprint/day-12)
+Make something inspired by a favorite childhood toy. I built a Lego figure's head with HTML/CSS.
+
 ### [Day 11](http://www.joeleisner.com/creative-sprint/day-11)
 Work together with another Creative Sprinter, today. Unfortunately, I don't know anyone else who I could collaborate with, but that didn't stop me! I got some feedback from folks, and decided to build another HTML/CSS loader with a bouncy-ball wave.
 
