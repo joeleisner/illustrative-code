@@ -36,6 +36,8 @@ To set this project up, make sure you have the following:
 * NPM 5.X
 * Gulp installed globally: `$ npm i -g gulp`
 
+This has been tested only on macOS Sierra / High Sierra, so functionality may vary.
+
 ### Install
 ```
 $ git clone https://github.com/joeleisner/creative-sprint-october-2017.git
