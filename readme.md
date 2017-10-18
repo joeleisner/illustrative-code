@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 18](http://www.joeleisner.com/creative-sprint/day-18)
+Take something you use every day and remake it using completely different materials. I built my matte-black iPhone 7.
+
 ### [Day 16](http://www.joeleisner.com/creative-sprint/day-16)
 It’s National Dictionary Day! Learn a new word and create something that represents it. I built an animated message bubble inspired by the word “conlang”, an invented language.
 
