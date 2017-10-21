@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 21](http://www.joeleisner.com/creative-sprint/day-21)
+Ask someone to tell you a story about their day. Make something inspired by their story! I made a pint glass full of beer.
+
 ### [Day 18](http://www.joeleisner.com/creative-sprint/day-18)
 Take something you use every day and remake it using completely different materials. I built my matte-black iPhone 7.
 
