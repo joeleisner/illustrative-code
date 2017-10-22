@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 22](http://www.joeleisner.com/creative-sprint/day-22)
+Create something inspired by a piece of spam e-email you have recently received. I made a minimalistic ruby.
+
 ### [Day 21](http://www.joeleisner.com/creative-sprint/day-21)
 Ask someone to tell you a story about their day. Make something inspired by their story! I made a pint glass full of beer.
 
