@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 23](http://www.joeleisner.com/creative-sprint/day-23)
+Make something inspired by a sound you hear today. I made a mini synth.
+
 ### [Day 22](http://www.joeleisner.com/creative-sprint/day-22)
 Create something inspired by a piece of spam e-email you have recently received. I made a minimalistic ruby.
 

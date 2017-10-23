@@ -1,0 +1,54 @@
+// Keyboard - Partials
+
+#keyboard
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: 180px
+    height: 90px
+    border-radius: 5px
+    background-color: $black
+
+    .controls
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 160px
+        height: 30px
+
+        .screen
+            width: 32px
+            height: 10px
+            border-radius: 2px
+            background-color: $slate
+
+        .knobs
+            display: flex
+            justify-content: space-between
+            width: 32px
+
+            .knob
+                box-sizing: border-box
+                width: 15px
+                height: 15px
+                border: 1px solid $red
+                border-radius: 100%
+
+    .keys
+        display: flex
+        justify-content: space-between
+        width: 159px
+        height: 60px
+        background-color: $black
+
+        .key
+            width: 15px
+            height: 60px
+            background-color: $white
+            &.minor
+                width: 10px
+                height: 45px
+                margin: 0px -5.5px
+                background-color: $black
+                z-index: 1
