@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 24](http://www.joeleisner.com/creative-sprint/day-24)
+It's #UnitedNationsDay! Find inspiration today in a tradition of a culture other than your own. I made some sushi.
+
 ### [Day 23](http://www.joeleisner.com/creative-sprint/day-23)
 Make something inspired by a sound you hear today. I made a mini synth.
 
