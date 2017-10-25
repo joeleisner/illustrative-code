@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 25](http://www.joeleisner.com/creative-sprint/day-25)
+Make an homage to or recreate another Sprinter's work by searching the Creative Sprint hashtag or Facebook group postings. I made a key inspired by [shapes.and.colors.rva](https://www.instagram.com/shapes.and.colors.rva/) & [westerfeld](https://www.instagram.com/westerfeld/)'s day 18 prompt.
+
 ### [Day 24](http://www.joeleisner.com/creative-sprint/day-24)
 It's #UnitedNationsDay! Find inspiration today in a tradition of a culture other than your own. I made some sushi.
 
