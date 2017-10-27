@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 27](http://www.joeleisner.com/creative-sprint/day-27)
+Make something inspired by what's inside your head right now. I couldn't think of anything, so I decided on another loader animation (get it?).
+
 ### [Day 25](http://www.joeleisner.com/creative-sprint/day-25)
 Make an homage to or recreate another Sprinter's work by searching the Creative Sprint hashtag or Facebook group postings. I made a key inspired by [shapes.and.colors.rva](https://www.instagram.com/shapes.and.colors.rva/) & [westerfeld](https://www.instagram.com/westerfeld/)'s day 18 prompt.
 
