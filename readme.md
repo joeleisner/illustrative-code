@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 29](http://www.joeleisner.com/creative-sprint/day-29)
+Ask someone whose opinion you respect to select something from your Creative Sprint work for you to revise or improve upon, today. I revised my day 18 prompt (matte-black iPhone 7) by adding more color and design.
+
 ### [Day 27](http://www.joeleisner.com/creative-sprint/day-27)
 Make something inspired by what's inside your head right now. I couldn't think of anything, so I decided on another loader animation (get it?).
 
