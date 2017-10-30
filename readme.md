@@ -6,6 +6,9 @@ This repo contains all web related [#creativesprint](https://www.instagram.com/e
 ## Prompts
 Here's a list of prompts that are contained within this repo.
 
+### [Day 30](http://www.joeleisner.com/creative-sprint/day-30)
+Create a trophy or another type of award to celebrate your Creative Sprint efforts! I created a "30 days of [#creativesprint](https://www.instagram.com/explore/tags/creativesprint/)" trophy.
+
 ### [Day 29](http://www.joeleisner.com/creative-sprint/day-29)
 Ask someone whose opinion you respect to select something from your Creative Sprint work for you to revise or improve upon, today. I revised my day 18 prompt (matte-black iPhone 7) by adding more color and design.
 
