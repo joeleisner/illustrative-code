@@ -1,0 +1,25 @@
+block vars
+doctype html
+html(lang="en")
+    head
+        //- Meta
+        meta(charset="utf-8")
+        meta(
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        )
+        //- Title
+        title Illustrative Code - Day #{ day }
+        //- Projects
+        link(
+            rel="stylesheet"
+            href="/assets/css/projects.min.css"
+        )
+        //- Styles
+        link(
+            rel="stylesheet"
+            href="styles.min.css"
+        )
+    body
+        h1.sr-only Illustrative Code - Day #{ day }
+        block content
