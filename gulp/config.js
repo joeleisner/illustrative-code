@@ -6,6 +6,7 @@ module.exports = {
         root:       'dist',
         livereload: true
     },
+    // Project-specific PUG/SASS
     projects: {
         pug: {
             dest:  'dist',
@@ -24,5 +25,15 @@ module.exports = {
             src:   'src/projects/**/styles.sass',
             watch: 'src/projects/**/*.sass'
         }
+    },
+    // Global SASS
+    sass: {
+        dest:  'dist/assets/css',
+        processors: [
+            autoprefixer({ browsers: ['last 2 versions'] }),
+            cssnano()
+        ],
+        src:   'src/sass/*.sass',
+        watch: 'src/sass/**/*.sass'
     }
 };

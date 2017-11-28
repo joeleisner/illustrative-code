@@ -26,15 +26,25 @@ gulp.task('projects-sass', () => {
 
 gulp.task('projects', ['projects-pug', 'projects-sass']);
 
-gulp.task('build', ['projects']);
+gulp.task('sass', () => {
+    gulp.src(config.sass.src)
+        .pipe(sass())
+        .pipe(postcss(config.sass.processors))
+        .pipe(rename())
+        .pipe(gulp.dest(config.sass.dest))
+        .pipe(connect.reload());
+});
+
+gulp.task('build', ['projects', 'sass']);
 
 gulp.task('connect', () => {
     connect.server(config.connect);
 });
 
 gulp.task('watch', () => {
-    gulp.watch(config.projects.pug.watch,  ['pug']);
-    gulp.watch(config.projects.sass.watch, ['sass']);
+    gulp.watch(config.projects.pug.watch,  ['projects-pug']);
+    gulp.watch(config.projects.sass.watch, ['projects-sass']);
+    gulp.watch(config.sass.watch,          ['sass']);
 });
 
 gulp.task('default', ['connect', 'watch']);
