@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/joeleisner/creative-sprint-october-2017#readme",
   "devDependencies": {
-    "autoprefixer": "^7.1.4",
+    "autoprefixer": "^7.1.6",
     "cssnano": "^3.10.0",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",
