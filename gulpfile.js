@@ -1,10 +1,10 @@
-let config =  require('./gulp/config'),
-    connect = require('gulp-connect'),
-    gulp =    require('gulp'),
-    postcss = require('gulp-postcss'),
-    pug =     require('gulp-pug'),
-    rename =  require('./gulp/rename'),
-    sass =    require('gulp-sass');
+const config =  require('./gulp/config');
+const connect = require('gulp-connect');
+const gulp =    require('gulp');
+const postcss = require('gulp-postcss');
+const pug =     require('gulp-pug');
+const rename =  require('./gulp/rename');
+const sass =    require('gulp-sass');
 
 gulp.task('pug', () => {
     gulp.src(config.pug.src)
@@ -16,8 +16,10 @@ gulp.task('pug', () => {
 gulp.task('sass', () => {
     gulp.src(config.sass.src)
         .pipe(sass())
-        .pipe(postcss(config.sass.processors))
-        .pipe(rename())
+        .pipe(postcss(config.sass.processors.exp))
+        .pipe(gulp.dest(config.sass.dest))
+        .pipe(postcss(config.sass.processors.min))
+        .pipe(rename(config.sass.rename))
         .pipe(gulp.dest(config.sass.dest))
         .pipe(connect.reload());
 });

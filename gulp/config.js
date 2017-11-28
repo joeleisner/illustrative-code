@@ -1,5 +1,5 @@
-let autoprefixer = require('autoprefixer'),
-    cssnano =      require('cssnano');
+const autoprefixer = require('autoprefixer');
+const cssnano =      require('cssnano');
 
 module.exports = {
     connect: {
@@ -11,16 +11,16 @@ module.exports = {
         options: {
             pretty: true
         },
-        src:   ['src/pug/**/*.pug', '!src/pug/shared/**/*.pug'],
-        watch: 'src/pug/**/*.pug'
+        src:   'src/projects/**/index.pug',
+        watch: 'src/projects/**/*.pug'
     },
     sass: {
         dest:  'dist',
-        processors: [
-            autoprefixer({ browsers: ['last 2 versions'] }),
-            cssnano()
-        ],
-        src:   ['src/sass/**/*.sass', '!src/sass/shared/**/*.sass'],
-        watch: 'src/sass/**/*.sass'
+        processors: {
+            exp: [autoprefixer({ browsers: ['last 2 versions'] })],
+            min: [cssnano()]
+        },
+        src:   'src/projects/**/styles.sass',
+        watch: 'src/projects/**/*.sass'
     }
 };
