@@ -1,25 +1,27 @@
 block vars
+include ../mixins/global
 doctype html
 html(lang="en")
     head
-        //- Meta
-        meta(charset="utf-8")
-        meta(
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        )
-        //- Title
-        title Illustrative Code - Day #{ day }
-        //- Projects
-        link(
-            rel="stylesheet"
-            href="/assets/css/projects.min.css"
-        )
-        //- Styles
-        link(
-            rel="stylesheet"
-            href="styles.min.css"
-        )
+        include ../includes/project/head
     body
-        h1.sr-only Illustrative Code - Day #{ day }
-        block content
+        header#header
+            ul.nav
+                li
+                    a(href="/illustrative-code/", title="Illustrative Code home")
+                        i.fa.fa-chevron-left(aria-hidden="true")
+                        span.text Back
+                li
+                    a(href="#", title="Show description", data-toggle-section="description")
+                        i.fa.fa-star(aria-hidden="true")
+                        span.text Description
+                li
+                    a(href="#", title="Show stylesheet menu", data-toggle-section="stylesheet")
+                        i.fa.fa-css3(aria-hidden="true")
+                        span.text CSS
+                li
+                    a(href="#", title="Go to repo page")
+                        i.fa.fa-github(aria-hidden="true")
+                        span.text GitHub
+        section(id="demo", aria-label="demo")
+            block content
