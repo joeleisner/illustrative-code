@@ -1,6 +1,6 @@
 mixin icon-link(path, title, icon, text, section)
     if section
-        a(href=path, title=title, data-toggle-section=section)
+        a(href=path, title=title, data-tab-toggle=section)
             i(class="fa fa-" + icon, aria-hidden="true")
             span.text #{ text }
     else

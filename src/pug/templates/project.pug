@@ -9,7 +9,7 @@ html(lang="en")
             ul.nav
                 li
                     +icon-link(
-                        "/illustrative-code/",
+                        "/",
                         "Illustrative Code home",
                         "chevron-left",
                         "Back"
@@ -45,11 +45,11 @@ html(lang="en")
                         "code-fork",
                         "GitHub"
                     )
-        section(id="demo", class="hidden", aria-label="demo", aria-hidden="false")
-            block demo
         section(id="description", class="hidden", aria-label="description", aria-hidden="true")
             block description
-        section(id="styles", class="visible", aria-label="styles", aria-hidden="true")
+        section(id="demo", class="visible", aria-label="demo", aria-hidden="false")
+            block demo
+        section(id="styles", class="hidden", aria-label="styles", aria-hidden="true")
             ul
                 li
                     a(href="styles.css")
@@ -59,3 +59,4 @@ html(lang="en")
                     a(href="styles.min.css")
                         i.fa.fa-compress
                         | Minified
+        include ../includes/project/scripts
