@@ -26,6 +26,12 @@ module.exports = {
             watch: 'src/projects/**/*.sass'
         }
     },
+    // Global JS
+    js: {
+        dest:  'dist/assets/js',
+        src:   'src/js/*.js',
+        watch: 'src/js/**/*.js'
+    },
     // Global PUG
     pug: {
         dest:  'dist',
