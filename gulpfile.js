@@ -26,6 +26,13 @@ gulp.task('projects-sass', () => {
 
 gulp.task('projects', ['projects-pug', 'projects-sass']);
 
+gulp.task('pug', () => {
+    gulp.src(config.pug.src)
+        .pipe(pug(config.pug.options))
+        .pipe(gulp.dest(config.pug.dest))
+        .pipe(connect.reload());
+});
+
 gulp.task('sass', () => {
     gulp.src(config.sass.src)
         .pipe(sass())
@@ -35,7 +42,9 @@ gulp.task('sass', () => {
         .pipe(connect.reload());
 });
 
-gulp.task('build', ['projects', 'sass']);
+gulp.task('global', ['pug', 'sass']);
+
+gulp.task('build', ['projects', 'global']);
 
 gulp.task('connect', () => {
     connect.server(config.connect);
@@ -44,6 +53,7 @@ gulp.task('connect', () => {
 gulp.task('watch', () => {
     gulp.watch(config.projects.pug.watch,  ['projects-pug']);
     gulp.watch(config.projects.sass.watch, ['projects-sass']);
+    gulp.watch(config.pug.watch,           ['pug', 'projects-pug']);
     gulp.watch(config.sass.watch,          ['sass']);
 });
 
