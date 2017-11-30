@@ -1,0 +1,48 @@
+// Sections - Project Partials
+
+section
+    flex: 1
+    display: flex
+    flex-flow: column
+    justify-content: center
+    align-items: center
+    color: $white
+    &#styles
+
+        ul
+            margin: 0
+            padding: 0
+            list-style: none
+            border: 1px solid darken($slate, 8%)
+            background-color: darken($slate, 4%)
+
+            li
+                border-bottom: 1px solid darken($slate, 8%)
+                &:last-child
+                    border-bottom: none
+
+                a
+                    display: block
+                    padding: 10px 15px
+                    font-size: 1.25em
+                    text-decoration: none
+                    &:hover, &:focus
+                        background-color: darken($slate, 8%)
+                        color: $white
+
+                    i.fa
+                        margin-right: 20px
+
+    a
+        color: $white
+        &:hover, &:focus
+            color: darken($white, 40%)
+
+section.visible
+    visibility: visible
+
+section.hidden
+    flex: 0
+    width: 0px
+    height: 0px
+    visibility: hidden

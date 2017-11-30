@@ -1,4 +1,9 @@
-mixin icon-link(path, icon, text)
-    a(href=path)
-        i(class="fa fa-" + icon)
-            span.sr-only text
+mixin icon-link(path, title, icon, text, section)
+    if section
+        a(href=path, title=title, data-toggle-section=section)
+            i(class="fa fa-" + icon, aria-hidden="true")
+            span.text #{ text }
+    else
+        a(href=path, title=title)
+            i(class="fa fa-" + icon, aria-hidden="true")
+            span.text #{ text }

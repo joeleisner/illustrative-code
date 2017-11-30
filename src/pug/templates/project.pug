@@ -8,20 +8,54 @@ html(lang="en")
         header#header
             ul.nav
                 li
-                    a(href="/illustrative-code/", title="Illustrative Code home")
-                        i.fa.fa-chevron-left(aria-hidden="true")
-                        span.text Back
+                    +icon-link(
+                        "/illustrative-code/",
+                        "Illustrative Code home",
+                        "chevron-left",
+                        "Back"
+                    )
                 li
-                    a(href="#", title="Show description", data-toggle-section="description")
-                        i.fa.fa-star(aria-hidden="true")
-                        span.text Description
+                    +icon-link(
+                        "#",
+                        "Show description",
+                        "align-justify",
+                        "Description",
+                        "description"
+                    )
+                li.active
+                    +icon-link(
+                        "#",
+                        "View demo",
+                        "play",
+                        "Demo",
+                        "demo"
+                    )
                 li
-                    a(href="#", title="Show stylesheet menu", data-toggle-section="stylesheet")
-                        i.fa.fa-css3(aria-hidden="true")
-                        span.text CSS
+                    +icon-link(
+                        "#",
+                        "Show stylesheet menu",
+                        "paint-brush",
+                        "Styles",
+                        "styles"
+                    )
                 li
-                    a(href="#", title="Go to repo page")
-                        i.fa.fa-github(aria-hidden="true")
-                        span.text GitHub
-        section(id="demo", aria-label="demo")
-            block content
+                    +icon-link(
+                        "#",
+                        "Go to repo page",
+                        "code-fork",
+                        "GitHub"
+                    )
+        section(id="demo", class="hidden", aria-label="demo", aria-hidden="false")
+            block demo
+        section(id="description", class="hidden", aria-label="description", aria-hidden="true")
+            block description
+        section(id="styles", class="visible", aria-label="styles", aria-hidden="true")
+            ul
+                li
+                    a(href="styles.css")
+                        i.fa.fa-expand
+                        | Expanded
+                li
+                    a(href="styles.min.css")
+                        i.fa.fa-compress
+                        | Minified

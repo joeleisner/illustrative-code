@@ -23,6 +23,15 @@ header#header
             border-right: 1px solid darken($slate, 8%)
             &:last-child
                 border-right: none
+            &.active
+                margin-top: -1px
+                border-top: 1px solid $slate
+
+                a
+                    background-color: $slate
+                    &:hover, &:focus
+                        background-color: $slate
+                        color: darken($white, 40%)
 
             a
                 flex: 1
@@ -50,17 +59,24 @@ header#header
         ul.nav
             width: $container-sm-width
 
-            li a
+            li
+                &.active
+                    margin-top: 0
+                    margin-bottom: -1px
+                    border-top: none
+                    border-bottom: 1px solid $slate
 
-                i.fa
-                    margin-right: 5px
+                a
 
-                span.text
-                    position: static
-                    width: auto
-                    height: auto
-                    margin: 0
-                    clip: auto
+                    i.fa
+                        margin-right: 10px
+
+                    span.text
+                        position: static
+                        width: auto
+                        height: auto
+                        margin: 0
+                        clip: auto
 
 =header--md()
     header#header ul.nav
