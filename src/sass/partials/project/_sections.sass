@@ -6,7 +6,16 @@ section
     flex-flow: column
     justify-content: center
     align-items: center
+    box-sizing: border-box
     color: $white
+    overflow: hidden
+    &#description
+        width: $container-width
+        padding: 30px
+
+    &#demo
+        width: 100%
+
     &#styles
 
         ul
@@ -38,11 +47,24 @@ section
         &:hover, &:focus
             color: darken($white, 40%)
 
-section.visible
-    visibility: visible
+    &.visible
+        visibility: visible
 
-section.hidden
-    flex: 0
-    width: 0px
-    height: 0px
-    visibility: hidden
+    &.hidden
+        flex: 0
+        width: 0px
+        height: 0px
+        padding: 0px !important
+        visibility: hidden
+
+=sections--sm()
+    section#description
+        width: $container-sm-width
+
+=sections--md()
+    section#description
+        width: $container-md-width
+
+=sections--lg()
+    section#description
+        width: $container-lg-width
