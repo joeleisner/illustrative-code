@@ -72,10 +72,5 @@ function tabs() {
     }
 }
 
-// Initialize all methods
-function initialize() {
-    tabs();
-}
-
-// When the DOM has loaded, initialize all methods
-document.addEventListener('DOMContentLoaded', initialize);
+// When the DOM has loaded, initialize the tabs functionality
+document.addEventListener('DOMContentLoaded', tabs);
