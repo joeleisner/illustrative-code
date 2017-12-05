@@ -5,6 +5,7 @@ html(lang="en")
     head
         include ../includes/project/head
     body
+        h1.sr-only=title
         header#header
             ul.nav
                 li
@@ -13,14 +14,6 @@ html(lang="en")
                         "Illustrative Code home",
                         "chevron-left",
                         "Back"
-                    )
-                li
-                    +icon-link(
-                        "#",
-                        "Show description",
-                        "align-justify",
-                        "Description",
-                        "description"
                     )
                 li.active
                     +icon-link(
@@ -33,6 +26,14 @@ html(lang="en")
                 li
                     +icon-link(
                         "#",
+                        "Show description",
+                        "align-justify",
+                        "Description",
+                        "description"
+                    )
+                li
+                    +icon-link(
+                        "#",
                         "Show stylesheet menu",
                         "paint-brush",
                         "Styles",
@@ -40,15 +41,15 @@ html(lang="en")
                     )
                 li
                     +icon-link(
-                        "#",
+                        "https://github.com/joeleisner/illustrative-code/tree/master/src/projects/" + date,
                         "Go to repo page",
                         "code-fork",
                         "GitHub"
                     )
-        section(id="description", class="hidden", aria-label="description", aria-hidden="true")
-            block description
         section(id="demo", class="visible", aria-label="demo", aria-hidden="false")
             block demo
+        section(id="description", class="hidden", aria-label="description", aria-hidden="true")
+            block description
         section(id="styles", class="hidden", aria-label="styles", aria-hidden="true")
             ul
                 li
