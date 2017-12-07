@@ -13,6 +13,14 @@ section
         width: $container-width
         padding: 30px
 
+        h1
+            font-size: 2em
+
+        h1, p
+            margin: 0 0 15px 0
+            line-height: 1.25em
+            text-align: center
+
     &#demo
         width: 100%
 
@@ -35,7 +43,9 @@ section
                     padding: 10px 15px
                     font-size: 1.25em
                     text-decoration: none
+                    transition: background-color 0.2s
                     &:hover, &:focus
+                        outline: none
                         background-color: darken($slate, 8%)
                         color: $white
 
@@ -45,6 +55,7 @@ section
     a
         color: $white
         &:hover, &:focus
+            outline: none
             color: darken($white, 40%)
 
     &.visible
