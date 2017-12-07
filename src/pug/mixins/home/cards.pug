@@ -1,0 +1,12 @@
+mixin card(path, title)
+    - var image = "assets/images/" + path.split("/").join("-")
+    a.card(
+        href=path
+    )
+        .wrap.loading
+            img(
+                class="loading"
+                src=image + ".tiny.jpg"
+                data-src=image + ".jpg"
+                alt=title
+            )

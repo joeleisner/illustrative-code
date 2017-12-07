@@ -1,0 +1,28 @@
+// Hammer - Partials
+
+@keyframes hammer
+    from
+        transform: rotate(45deg) translateX(30px)
+    to
+        transform: rotate(0deg) translateX(30px)
+
+#hammer
+    position: relative
+    display: flex
+    align-items: center
+    width: 120px
+    height: 60px
+    transform-origin: 100% 50%
+    animation: hammer 1s infinite alternate
+
+    *
+        background-color: $white
+
+    .head
+        width: 30px
+        height: 60px
+
+    .handle
+        flex: 1 0 auto
+        height: 10px
+        margin-left: -35px

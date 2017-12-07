@@ -1,0 +1,22 @@
+extends ../../../../pug/templates/project.pug
+
+block vars
+    - var title = "Creative Sprint Trophy"
+    - var date = "2017/10/30"
+    
+block description
+    h1=title
+    p This example was made for day 30 of the October 2017 Creative Sprint. The prompt was to create a trophy or another type of award to celebrate my Creative Sprint efforts! I created a “30 days of #creativesprint “ trophy using 🏆.
+
+block demo
+    #trophy
+        .top
+            .handle.left
+            .cup
+            .handle.right
+        .stem
+            .cutout.left
+            .cutout.right
+        .bottom
+            .step 30 days
+            .step #creativesprint
