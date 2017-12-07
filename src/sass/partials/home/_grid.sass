@@ -1,0 +1,56 @@
+// Grid - Home Partials
+
+.container
+    width: $container-width
+    margin: 0 auto
+
+.row
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    width: 100%
+    height: auto
+    overflow: auto
+
+.col
+    flex: none
+    width: 50%
+    box-sizing: border-box
+    padding: 15px 30px
+    &:nth-child(odd)
+        padding-right: 15px
+    &:nth-child(even)
+        padding-left: 15px
+    &.full
+        flex: 1
+        width: auto
+
+=grid--sm()
+    .container
+        width: $container-sm-width
+
+    .col
+        width: 25%
+        padding: 10px
+        &:nth-child(odd)
+            padding-right: 10px
+        &:nth-child(even)
+            padding-left: 10px
+        &.full
+            flex: 1
+            width: auto
+
+=grid--md()
+    .container
+        width: $container-md-width
+
+=grid--lg()
+    .container
+        width: $container-lg-width
+
+    .col
+        padding: 15px
+        &:nth-child(odd)
+            padding-right: 15px
+        &:nth-child(even)
+            padding-left: 15px
