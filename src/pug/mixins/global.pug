@@ -1,9 +1,10 @@
 mixin icon-link(path, title, icon, text, section)
+    - var target = (path !== '/' && path !== '/illustrative-code/') ? '_blank' : false
     if section
         a(href=path, title=title, data-tab-toggle=section)
             i(class="fa fa-" + icon, aria-hidden="true")
             span.text #{ text }
     else
-        a(href=path, title=title)
+        a(href=path, title=title, target=target)
             i(class="fa fa-" + icon, aria-hidden="true")
             span.text #{ text }

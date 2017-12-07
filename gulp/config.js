@@ -9,7 +9,7 @@ module.exports = {
     // Project-specific PUG/SASS
     projects: {
         pug: {
-            dest:  'dist',
+            dest:  'dist/illustrative-code',
             options: {
                 pretty: true
             },
@@ -17,7 +17,7 @@ module.exports = {
             watch: 'src/projects/**/*.pug'
         },
         sass: {
-            dest:  'dist',
+            dest:  'dist/illustrative-code',
             processors: {
                 exp: [autoprefixer({ browsers: ['last 2 versions'] })],
                 min: [cssnano()]
@@ -28,13 +28,13 @@ module.exports = {
     },
     // Global JS
     js: {
-        dest:  'dist/assets/js',
+        dest:  'dist/illustrative-code/assets/js',
         src:   'src/js/*.js',
         watch: 'src/js/**/*.js'
     },
     // Global PUG
     pug: {
-        dest:  'dist',
+        dest:  'dist/illustrative-code',
         options: {
             pretty: true
         },
@@ -43,7 +43,7 @@ module.exports = {
     },
     // Global SASS
     sass: {
-        dest:  'dist/assets/css',
+        dest:  'dist/illustrative-code/assets/css',
         processors: [
             autoprefixer({ browsers: ['last 2 versions'] }),
             cssnano()
