@@ -1,54 +1,52 @@
-const autoprefixer = require('autoprefixer');
-const cssnano =      require('cssnano');
+const autoprefixer = require('autoprefixer'),
+    cssnano        = require('cssnano'),
+    processors     = {
+        exp: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
+        min: [ cssnano() ]
+    };
 
 module.exports = {
-    connect: {
-        root:       'dist',
-        livereload: true
-    },
-    // Project-specific PUG/SASS
-    projects: {
+    global: {
+        js: {
+            dest: 'dist/illustrative-code/assets/js',
+            src:  'src/js/*.js'
+        },
         pug: {
-            dest:  'dist/illustrative-code',
+            dest: 'dist/illustrative-code',
             options: {
                 pretty: true
             },
-            src:   'src/projects/**/index.pug',
-            watch: 'src/projects/**/*.pug'
+            src:  'src/pug/*.pug'
         },
         sass: {
-            dest:  'dist/illustrative-code',
-            processors: {
-                exp: [autoprefixer({ browsers: ['last 2 versions'] })],
-                min: [cssnano()]
-            },
-            src:   'src/projects/**/styles.sass',
-            watch: 'src/projects/**/*.sass'
+            dest: 'dist/illustrative-code/assets/css',
+            processors,
+            src:  'src/sass/*.sass'
         }
     },
-    // Global JS
-    js: {
-        dest:  'dist/illustrative-code/assets/js',
-        src:   'src/js/*.js',
-        watch: 'src/js/**/*.js'
-    },
-    // Global PUG
-    pug: {
-        dest:  'dist/illustrative-code',
-        options: {
-            pretty: true
+    projects: {
+        pug: {
+            dest: 'dist/illustrative-code',
+            options: {
+                pretty: true
+            },
+            src:  'src/projects/**/index.pug'
         },
-        src:   'src/pug/*.pug',
-        watch: 'src/pug/**/*.pug'
+        sass: {
+            dest: 'dist/illustrative-code',
+            processors,
+            src:  'src/projects/**/styles.sass'
+        }
     },
-    // Global SASS
-    sass: {
-        dest:  'dist/illustrative-code/assets/css',
-        processors: [
-            autoprefixer({ browsers: ['last 2 versions'] }),
-            cssnano()
-        ],
-        src:   'src/sass/*.sass',
-        watch: 'src/sass/**/*.sass'
+    watch: {
+        global: {
+            js:   'src/js/**/*.js',
+            pug:  'src/pug/**/*.pug',
+            sass: 'src/sass/**/*.sass'
+        },
+        projects: {
+            pug:  'src/projects/**/*.pug',
+            sass: 'src/projects/**/*.sass'
+        }
     }
 };
