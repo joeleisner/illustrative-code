@@ -1,26 +1,25 @@
 {
-  "name": "creative-sprint-october-2017",
-  "version": "1.0.2",
-  "description": "A repo containing all web related #creativesprint prompts of Joel Eisner for October 2017",
+  "name": "illustrative-code",
+  "version": "1.1.0",
+  "description": "Illustrations made with code",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joeleisner/creative-sprint-october-2017.git"
+    "url": "git+https://github.com/joeleisner/illustrative-code.git"
   },
   "author": "Joel Eisner <jeisner93@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joeleisner/creative-sprint-october-2017/issues"
+    "url": "https://github.com/joeleisner/illustrative-code/issues"
   },
-  "homepage": "https://github.com/joeleisner/creative-sprint-october-2017#readme",
+  "homepage": "https://github.com/joeleisner/illustrative-code#readme",
   "devDependencies": {
     "autoprefixer": "^9.1.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "cssnano": "^4.0.5",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-babel": "^7.0.1",
-    "gulp-connect": "^5.5.0",
     "gulp-postcss": "^8.0.0",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.4.0",
