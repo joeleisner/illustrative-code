@@ -14,16 +14,16 @@
   },
   "homepage": "https://github.com/joeleisner/illustrative-code#readme",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "autoprefixer": "^9.4.7",
-    "cssnano": "^4.1.8",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "autoprefixer": "^9.5.0",
+    "cssnano": "^4.1.10",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-postcss": "^8.0.0",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.2"
   }
 }
