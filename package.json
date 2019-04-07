@@ -8,6 +8,33 @@
     "url": "git+https://github.com/joeleisner/illustrative-code.git"
   },
   "author": "Joel Eisner <jeisner93@gmail.com>",
+  "scripts": {
+    "build": "npx gulp build",
+    "build:exp": "npx gulp build:exp",
+    "build:min": "npx gulp build:min",
+    "build:global": "npx gulp build:global",
+    "build:global:exp": "npx gulp build:global:exp",
+    "build:global:min": "npx gulp build:global:min",
+    "build:projects": "npx gulp build:projects",
+    "build:projects:exp": "npx gulp build:projects:exp",
+    "build:projects:min": "npx gulp build:projects:min",
+    "js": "npx gulp js",
+    "js:exp": "npx gulp js:exp",
+    "js:min": "npx gulp js:min",
+    "pug": "npx gulp pug",
+    "pug:global": "npx gulp pug:global",
+    "pug:projects": "npx gulp pug:projects",
+    "sass": "npx gulp sass",
+    "sass:exp": "npx gulp sass:exp",
+    "sass:min": "npx gulp sass:min",
+    "sass:global": "npx gulp sass:global",
+    "sass:global:exp": "npx gulp sass:global:exp",
+    "sass:global:min": "npx gulp sass:global:min",
+    "sass:projects": "npx gulp sass:projects",
+    "sass:projects:exp": "npx gulp sass:projects:exp",
+    "sass:projects:min": "npx gulp sass:projects:min",
+    "watch": "npx gulp watch"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/joeleisner/illustrative-code/issues"
