@@ -1,6 +1,6 @@
 {
   "name": "illustrative-code",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Illustrations made with code",
   "main": "gulpfile.js",
   "repository": {
@@ -8,22 +8,52 @@
     "url": "git+https://github.com/joeleisner/illustrative-code.git"
   },
   "author": "Joel Eisner <jeisner93@gmail.com>",
+  "scripts": {
+    "build": "npx gulp build",
+    "build:exp": "npx gulp build:exp",
+    "build:min": "npx gulp build:min",
+    "build:global": "npx gulp build:global",
+    "build:global:exp": "npx gulp build:global:exp",
+    "build:global:min": "npx gulp build:global:min",
+    "build:projects": "npx gulp build:projects",
+    "build:projects:exp": "npx gulp build:projects:exp",
+    "build:projects:min": "npx gulp build:projects:min",
+    "js": "npx gulp js",
+    "js:exp": "npx gulp js:exp",
+    "js:min": "npx gulp js:min",
+    "pug": "npx gulp pug",
+    "pug:global": "npx gulp pug:global",
+    "pug:projects": "npx gulp pug:projects",
+    "sass": "npx gulp sass",
+    "sass:exp": "npx gulp sass:exp",
+    "sass:min": "npx gulp sass:min",
+    "sass:global": "npx gulp sass:global",
+    "sass:global:exp": "npx gulp sass:global:exp",
+    "sass:global:min": "npx gulp sass:global:min",
+    "sass:projects": "npx gulp sass:projects",
+    "sass:projects:exp": "npx gulp sass:projects:exp",
+    "sass:projects:min": "npx gulp sass:projects:min",
+    "watch": "npx gulp watch"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/joeleisner/illustrative-code/issues"
   },
   "homepage": "https://github.com/joeleisner/illustrative-code#readme",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "autoprefixer": "^9.4.7",
-    "cssnano": "^4.1.8",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "autoprefixer": "^9.5.0",
+    "cssnano": "^4.1.10",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
+    "gulp-empty": "^0.1.2",
     "gulp-postcss": "^8.0.0",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.2",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^5.2.1"
   }
 }
