@@ -1,6 +1,7 @@
 import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
 import cssnano from 'cssnano';
+import fiber from 'fibers';
 import gulp from 'gulp';
 import gulpPug from 'gulp-pug';
 import gulpSass from 'gulp-sass';
@@ -9,9 +10,12 @@ import imageResize from 'gulp-image-resize';
 import named from 'vinyl-named';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
+import sassCompiler from 'sass';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config';
 import webpackStream from 'webpack-stream';
+
+gulpSass.compiler = sassCompiler;
 
 const { NODE_ENV } = process.env;
 const MODE = NODE_ENV || 'development';
@@ -89,7 +93,7 @@ function sassTask({ src, dest }) {
     if (inProduction) plugins.push(cssnano);
 
     return gulp.src(src)
-        .pipe(gulpSass())
+        .pipe(gulpSass({ fiber }))
         .pipe(postcss(plugins))
         .pipe(gulp.dest(dest))
         .pipe(browserSync.stream());
