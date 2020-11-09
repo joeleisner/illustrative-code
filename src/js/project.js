@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 // Open sections using tabs
 function tabs() {
     // Select all tabs, set what tab is visible, and grab any available cookies as well as the window location
