@@ -79,7 +79,7 @@ export function globalPug() {
 // Turn project PUG into HTML
 export function projectPug() {
     return pugTask({
-        src: 'src/projects/**/index.pug'
+        src: 'src/pages/**/index.pug'
     });
 }
 
@@ -110,7 +110,7 @@ export function globalSass() {
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
-        src: 'src/projects/**/styles.sass',
+        src: 'src/pages/**/styles.sass',
         dest: 'dist/illustrative-code'
     });
 }
@@ -133,8 +133,8 @@ export function serve() {
 export function watch() {
     gulp.watch(['src/images/**/*'], img);
     gulp.watch(['src/js/**/*.js'], js);
-    gulp.watch(['src/{projects,pug}/**/*.pug'], pug);
-    gulp.watch(['src/{projects,sass}/**/*.sass'], sass);
+    gulp.watch(['src/{pages,pug}/**/*.{md,pug}'], pug);
+    gulp.watch(['src/{pages,sass}/**/*.sass'], sass);
 }
 
 // Build all assets
