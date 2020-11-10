@@ -1,14 +1,13 @@
-# Illustrative Code
+<h1 align="center">Illustrative Code</h1>
+
 The idea behind **illustrative code** is to teach the direct parallels between code and creativity while incentivizing the exploration into the world of front-end web development for designers. This project is 100% open-source, and anything found within this repo may be copied or remixed. This repo contains the source code to the illustrative code project page as well as its examples.
 
-If anything withing this project inspires you to dive into your own piece of illustrative code, be sure to share it on [Twitter](https://twitter.com/hashtag/illustrativecode) and [Instagram](https://www.instagram.com/explore/tags/illustrativecode/) using the **#illustrativecode** hashtag.
+If anything within this project inspires you to dive into your own piece of illustrative code, be sure to share it on [Twitter](https://twitter.com/hashtag/illustrativecode) and [Instagram](https://www.instagram.com/explore/tags/illustrativecode/) using the **#illustrativecode** hashtag.
 
 ## Prerequisites
-To set this project up, make sure you have the following:
-* Node.js 8.2 or higher
-* NPM 5.2.X
-
-This has been tested only on macOS Sierra / High Sierra, so functionality may vary.
+At the time of writing, the following versions of Node/NPM are recommended before setting this project up:
+* Node.js v14.15.0 (LTS)
+* NPM 6.14.8
 
 ### Installation
 ```shell
@@ -19,49 +18,15 @@ npm i
 
 ### Development
 ```shell
-# npm run * / npx gulp *
-# *:exp = expanded, *:min = minified
-
-# Build all assets
+# Build all production assets...
 npm run build
-npm run build:exp
-npm run build:min
-# Build all global assets
-npm run build:global
-npm run build:global:exp
-npm run build:global:min
-# Build all project assets
-npm run build:projects
-npm run build:projects:exp
-npm run build:projects:min
+# ... and then spin up a local server
+npm run serve
 
-# Build JS assets
-npm run js
-npm run js:exp
-npm run js:min
-
-# Build PUG (HTML) assets
-npm run pug
-# Build global PUG (HTML) assets
-npm run pug:global
-# Build project PUG (HTML) assets
-npm run pug:projects
-
-# Build SASS (CSS) assets
-npm run sass
-npm run sass:exp
-npm run sass:min
-# Build global SASS (CSS) assets
-npm run sass:global
-npm run sass:global:exp
-npm run sass:global:min
-# Build project SASS (CSS) assets
-npm run sass:projects
-npm run sass:projects:exp
-npm run sass:projects:min
-
-# Build assets while watching for changes
-npm run watch
+# Build development assets, spin up a local server, and watch for changes
+npm run develop
+npm run dev
+npm run start
 ```
 
 ## Credits

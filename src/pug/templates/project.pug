@@ -1,63 +1,53 @@
-block vars
-include ../mixins/global
-doctype html
-html(lang="en")
-    head
-        include ../includes/project/head
-    body
-        h1.sr-only=title
-        header#header
-            ul.nav
-                li
-                    +icon-link(
-                        "/illustrative-code/",
-                        "Illustrative Code home",
-                        "chevron-left",
-                        "Back"
-                    )
-                li.active
-                    +icon-link(
-                        "#",
-                        "View demo",
-                        "play",
-                        "Demo",
-                        "demo"
-                    )
-                li
-                    +icon-link(
-                        "#",
-                        "Show description",
-                        "align-justify",
-                        "Description",
-                        "description"
-                    )
-                li
-                    +icon-link(
-                        "#",
-                        "Show stylesheet menu",
-                        "paint-brush",
-                        "Styles",
-                        "styles"
-                    )
-                li
-                    +icon-link(
-                        "https://github.com/joeleisner/illustrative-code/tree/master/src/projects/" + date,
-                        "Example GitHub repo page",
-                        "code-fork",
-                        "GitHub"
-                    )
-        section(id="demo", class="visible", aria-label="demo", aria-hidden="false")
-            block demo
-        section(id="description", class="hidden", aria-label="description", aria-hidden="true")
-            block description
-        section(id="styles", class="hidden", aria-label="styles", aria-hidden="true")
-            ul
-                li
-                    a(href="styles.css")
-                        i.fa.fa-expand
-                        | Expanded
-                li
-                    a(href="styles.min.css")
-                        i.fa.fa-compress
-                        | Minified
-        include ../includes/project/scripts
+extends ./base
+
+block head
+    include ../includes/project/head
+
+block body
+    h1.sr-only=title
+    header#header
+        ul.nav
+            li
+                +icon-link(
+                    "/illustrative-code/",
+                    "Illustrative Code home",
+                    "chevron-left",
+                    "Back"
+                )
+            li.active
+                +icon-link(
+                    "#",
+                    "View demo",
+                    "play",
+                    "Demo",
+                    "demo"
+                )
+            li
+                +icon-link(
+                    "#",
+                    "Show description",
+                    "align-justify",
+                    "Description",
+                    "description"
+                )
+            li
+                +icon-link(
+                    "styles.css",
+                    "Show stylesheet",
+                    "paint-brush",
+                    "Styles"
+                )
+            li
+                +icon-link(
+                    "https://github.com/joeleisner/illustrative-code/tree/master/src/pages/projects/" + date,
+                    "GitHub repo page",
+                    "code-fork",
+                    "GitHub"
+                )
+    section(id="demo", aria-label="demo", aria-hidden="false")
+        block demo
+    section(id="description", aria-label="description", aria-hidden="true")
+        block description
+
+block scripts
+    include ../includes/project/scripts

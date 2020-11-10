@@ -1,11 +1,14 @@
-include ../mixins/global
+extends ./base
+
 include ../mixins/home/cards
-doctype html
-html(lang="en")
-    head
-        include ../includes/home/head
-    body
-        include ../includes/home/nav
-        #wrapper
-            block content
-        include ../includes/home/scripts
+
+block head
+    include ../includes/home/head
+
+block body
+    include ../includes/home/nav
+    #wrapper
+        block content
+
+block scripts
+    include ../includes/home/scripts
