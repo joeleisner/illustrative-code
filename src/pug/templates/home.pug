@@ -1,18 +1,14 @@
-include ../mixins/global
+extends ./base
+
 include ../mixins/home/cards
-doctype html
-html(lang="en")
-    head
-        include ../includes/home/head
-        //- Font Awesome
-        link(
-            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-            rel="stylesheet"
-            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-            crossorigin="anonymous"
-        )
-    body
-        include ../includes/home/nav
-        #wrapper
-            block content
-        include ../includes/home/scripts
+
+block head
+    include ../includes/home/head
+
+block body
+    include ../includes/home/nav
+    #wrapper
+        block content
+
+block scripts
+    include ../includes/home/scripts

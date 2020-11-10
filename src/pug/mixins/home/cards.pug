@@ -1,7 +1,7 @@
 mixin card(path, title)
-    - var image = "assets/images/" + path.split("/").join("-")
+    - var image = "/illustrative-code/assets/images/" + path.split("/").join("-")
     a.card(
-        href=path
+        href="/illustrative-code/projects/" + path
     )
         .wrap.loading
             img(
