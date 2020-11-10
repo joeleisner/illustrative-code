@@ -1,0 +1,18 @@
+extends ../../../../../pug/templates/project.pug
+
+block vars
+    - var title = "Sushi"
+    - var date = "2017/10/24"
+    
+block description
+    include:markdown-it readme.md
+
+block demo
+    #sushi
+        .rice
+            .seaweed
+                .filling
+                    .avacado
+                        .piece
+                        .piece
+                    .salmon

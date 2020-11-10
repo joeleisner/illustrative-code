@@ -1,0 +1,16 @@
+extends ../../../../../pug/templates/project.pug
+
+block vars
+    - var title = "Speech Bubble"
+    - var date = "2017/10/16"
+
+block description
+    include:markdown-it readme.md
+
+block demo
+    #bubble
+        .body
+            .dot
+            .dot
+            .dot
+        .pointer
