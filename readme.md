@@ -2,7 +2,7 @@
 
 The idea behind **illustrative code** is to teach the direct parallels between code and creativity while incentivizing the exploration into the world of front-end web development for designers. This project is 100% open-source, and anything found within this repo may be copied or remixed. This repo contains the source code to the illustrative code project page as well as its examples.
 
-If anything withing this project inspires you to dive into your own piece of illustrative code, be sure to share it on [Twitter](https://twitter.com/hashtag/illustrativecode) and [Instagram](https://www.instagram.com/explore/tags/illustrativecode/) using the **#illustrativecode** hashtag.
+If anything within this project inspires you to dive into your own piece of illustrative code, be sure to share it on [Twitter](https://twitter.com/hashtag/illustrativecode) and [Instagram](https://www.instagram.com/explore/tags/illustrativecode/) using the **#illustrativecode** hashtag.
 
 ## Prerequisites
 At the time of writing, the following versions of Node/NPM are recommended before setting this project up:
