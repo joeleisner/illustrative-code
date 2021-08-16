@@ -12,10 +12,10 @@ import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import sassCompiler from 'sass';
 import webpack from 'webpack';
-import webpackConfig from './webpack.config';
+import webpackConfig from './webpack.config.js';
 import webpackStream from 'webpack-stream';
 
-gulpSass.compiler = sassCompiler;
+const transpiler = gulpSass(sassCompiler);
 
 const { NODE_ENV } = process.env;
 const MODE = NODE_ENV || 'development';
@@ -93,7 +93,7 @@ function sassTask({ src, dest }) {
     if (inProduction) plugins.push(cssnano);
 
     return gulp.src(src)
-        .pipe(gulpSass({ fiber }))
+        .pipe(transpiler({ fiber }))
         .pipe(postcss(plugins))
         .pipe(gulp.dest(dest))
         .pipe(browserSync.stream());
