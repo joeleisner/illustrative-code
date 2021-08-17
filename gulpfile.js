@@ -26,7 +26,7 @@ const inProduction = MODE === 'production';
 export function optimizeImages() {
     const verbose = inDevelopment;
 
-    return gulp.src('src/images/**/*')
+    return gulp.src('images/**/*')
         .pipe(imagemin({ verbose }))
         .pipe(gulp.dest('dist/illustrative-code/assets/images'))
         .pipe(browserSync.stream());
@@ -34,7 +34,7 @@ export function optimizeImages() {
 
 // Resize images
 export function resizeImages() {
-    return gulp.src('src/images/**/*.jpg')
+    return gulp.src('images/**/*.jpg')
         .pipe(imageResize({
             width: 60,
             height: 60
@@ -52,7 +52,7 @@ export function js() {
     const mode = MODE;
     const options = Object.assign({ mode }, webpackConfig);
 
-    return gulp.src('src/js/*.js')
+    return gulp.src('js/*.js')
         .pipe(named())
         .pipe(webpackStream(options, webpack))
         .pipe(gulp.dest('dist/illustrative-code/assets/js'))
@@ -72,14 +72,14 @@ function pugTask({ src }) {
 // Turn global PUG into HTML
 export function globalPug() {
     return pugTask({
-        src: 'src/pug/*.pug'
+        src: 'pug/*.pug'
     });
 }
 
 // Turn project PUG into HTML
 export function projectPug() {
     return pugTask({
-        src: 'src/pages/**/index.pug'
+        src: 'pages/**/index.pug'
     });
 }
 
@@ -110,7 +110,7 @@ export function globalSass() {
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
-        src: 'src/pages/**/styles.sass',
+        src: 'pages/**/styles.sass',
         dest: 'dist/illustrative-code'
     });
 }
@@ -131,12 +131,12 @@ export function serve() {
 
 // Watch for source file changes
 export function watch() {
-    gulp.watch(['src/images/**/*'], img);
-    gulp.watch(['src/js/**/*.js'], js);
-    gulp.watch(['src/{pages,pug}/**/*.{md,pug}'], pug);
+    gulp.watch(['images/**/*'], img);
+    gulp.watch(['js/**/*.js'], js);
+    gulp.watch(['{pages,pug}/**/*.{md,pug}'], pug);
     gulp.watch([
         'scss/**/*.scss',
-        'src/pages/**/*.{sass,scss}'
+        'pages/**/*.{sass,scss}'
     ], sass);
 }
 
