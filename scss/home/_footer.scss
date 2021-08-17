@@ -1,0 +1,10 @@
+// Footer - Home Partials
+
+@use "../modules/style";
+
+footer#footer {
+    width: 100%;
+    margin-top: 15px;
+    border-top: 1px solid style.darken("white", 10%);
+    background-color: style.darken("white", 5%);
+}

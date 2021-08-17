@@ -102,7 +102,7 @@ function sassTask({ src, dest }) {
 // Turn global SASS into CSS
 export function globalSass() {
     return sassTask({
-        src: 'src/sass/*.sass',
+        src: 'scss/{home,project}.scss',
         dest: 'dist/illustrative-code/assets/css'
     });
 }
@@ -134,7 +134,10 @@ export function watch() {
     gulp.watch(['src/images/**/*'], img);
     gulp.watch(['src/js/**/*.js'], js);
     gulp.watch(['src/{pages,pug}/**/*.{md,pug}'], pug);
-    gulp.watch(['src/{pages,sass}/**/*.sass'], sass);
+    gulp.watch([
+        'scss/**/*.scss',
+        'src/pages/**/*.{sass,scss}'
+    ], sass);
 }
 
 // Build all assets

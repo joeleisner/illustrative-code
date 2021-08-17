@@ -1,0 +1,45 @@
+// Project sections
+
+@use "../modules/media";
+@use "../modules/style";
+
+section {
+    flex: 0;
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: style.color("white");
+    overflow: hidden;
+
+    &[aria-hidden="false"] {
+        flex: 1;
+        width: auto;
+        height: auto;
+        visibility: visible;
+    }
+
+    &#description {
+        padding: 30px;
+        @include style.container;
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h1,
+        p {
+            margin: 0 0 15px 0;
+            line-height: 1.25em;
+            text-align: center;
+        }
+    }
+
+    &#demo {
+        width: 100%;
+    }
+}

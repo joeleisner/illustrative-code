@@ -1,0 +1,23 @@
+// Home logo
+
+@use "../modules/media";
+@use "../modules/style";
+
+.logo {
+    max-width: 600px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 30px;
+    fill: style.color("slate");
+
+    @include media.breakpoint("sm") {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+
+    @include media.breakpoint("lg") {
+        padding: 15px;
+    }
+}

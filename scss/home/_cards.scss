@@ -1,0 +1,40 @@
+// Home cards
+
+@use "../modules/animate";
+@use "../modules/style";
+
+.card {
+    --padding: 0;
+    display: block;
+    background-color: style.color("slate");
+    box-shadow: 0px 5px 10px 0px rgba(style.color("slate"), 0.3);
+    overflow: hidden;
+    @include animate.transition(box-shadow, transform);
+
+    &:hover,
+    &:focus {
+        box-shadow: none;
+        transform: scale(1.1);
+    }
+
+    .wrap {
+        display: flex;
+        filter: none;
+        @include animate.transition(filter);
+
+        &.loading {
+            filter: blur(10px);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            opacity: 1;
+            @include animate.transition(opacity);
+
+            &.loading {
+                opacity: 0;
+            }
+        }
+    }
+}

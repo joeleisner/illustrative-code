@@ -3,11 +3,7 @@ extends ../pug/templates/home
 block content
     .container
         .row
-            .col.full.logo-wrapper
-                img.logo(
-                    src="/illustrative-code/assets/images/logo.svg",
-                    alt="Illustrative Code logo"
-                )
+            include ../images/logo.svg
         .row
             .col.full
                 h1.sr-only Illustrative Code

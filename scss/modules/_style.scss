@@ -1,0 +1,76 @@
+// Shared style module
+
+@use "sass:color";
+@use "sass:map";
+@use "sass:meta";
+@use "./media";
+
+// Color
+
+$colors: (
+    "black": #000,
+    "slate": #333,
+    "white": #fff
+);
+
+@function color($name) {
+    @return map.get($colors, $name);
+}
+
+// Color manipulation
+
+@function lightness($color, $percentage) {
+    @if meta.type-of($color) == string {
+        $color: map.get($colors, $color);
+    }
+    @return color.adjust($color, $lightness: $percentage);
+}
+
+@function lighten($color, $percentage) {
+    @return lightness($color, $percentage);
+}
+
+@function darken($color, $percentage) {
+    @return lightness($color, $percentage * -1);
+}
+
+// Container
+
+$container--widths: (
+    "base": 100%,
+    "sm": 744px,
+    "md": 960px,
+    "lg": 1200px
+);
+
+@mixin container {
+    width: map.get($container--widths, "base");
+    margin: 0 auto;
+
+    $breakpoints: map.keys(map.remove($container--widths, "base"));
+
+    @each $breakpoint in $breakpoints {
+        @include media.breakpoint($breakpoint) {
+            width: map.get($container--widths, $breakpoint);
+        }
+    }
+}
+
+// Screen reader
+
+@mixin screen-reader--only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+@mixin screen-reader--restore {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    clip: auto;
+}
