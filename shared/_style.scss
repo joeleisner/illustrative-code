@@ -74,3 +74,17 @@ $container--widths: (
     margin: 0;
     clip: auto;
 }
+
+// Icon
+
+@mixin icon($icon: false, $family: "Font Awesome 5 Free") {
+    @if $icon {
+        content: $icon;
+    }
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-family: $family;
+    font-weight: 900;
+}

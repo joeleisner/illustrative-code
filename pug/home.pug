@@ -1,0 +1,48 @@
+extends base
+
+include cards
+
+block settings
+    -
+        var nav = [
+            {
+                to: "/",
+                title: "Joel Eisner's homepage",
+                icon: "\uf015",
+                text: "Home"
+            },
+            {
+                to: "https://twitter.com/joeleisner",
+                title: "Joel Eisner's Twitter",
+                icon: "\uf099",
+                family: "brands",
+                text: "Twitter"
+            },
+            {
+                to: "https://instagram.com/joeleisner",
+                title: "Joel Eisner's Instagram",
+                icon: "\uf16d",
+                family: "brands",
+                text: "Instagram"
+            },
+            {
+                to: "https://github.com/joeleisner/illustrative-code/",
+                title: "Project GitHub repo page",
+                icon: "\uf126",
+                text: "GitHub"
+            }
+        ]
+
+block head
+    //- Title
+    title Illustrative Code
+
+block body
+    #wrapper
+        block content
+
+block scripts
+    //- Home JS
+    script(
+        src="/illustrative-code/assets/js/home.js"
+    )

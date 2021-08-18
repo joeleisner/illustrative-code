@@ -1,5 +1,8 @@
 block vars
-include ../mixins/global
+block settings
+
+include nav
+
 doctype html
 html(lang="en")
     head
@@ -17,14 +20,14 @@ html(lang="en")
             type="image/png" 
             href="/illustrative-code/assets/images/favicon.png"
         )
-        //- Font Awesome
+        //- CSS
         link(
-            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             rel="stylesheet"
-            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-            crossorigin="anonymous"
+            href="/illustrative-code/assets/css/global.css"
         )
-    body
+    body(data-theme=theme)
+        //- Navigation
+        +nav(nav)
         //- Page body
         block body
         //- Page scripts

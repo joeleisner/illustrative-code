@@ -1,8 +1,0 @@
-@use "modules/style";
-@use "shared/reset" with (
-    $body__background-color: style.color("slate"),
-    $body__color: style.color("white"),
-    $link__color: style.color("white")
-);
-@use "project/header";
-@use "project/sections";

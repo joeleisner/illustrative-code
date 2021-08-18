@@ -1,0 +1,62 @@
+extends base
+
+block settings
+    -
+        var theme = "dark"
+        var nav = [
+            {
+                to: "/illustrative-code/",
+                title: "Illustrative Code home",
+                icon: "\uf053",
+                text: "Back"
+            },
+            {
+                type: "button",
+                to: "#demo",
+                title: "View demo",
+                icon: "\uf04b",
+                text: "Demo",
+                active: true
+            },
+            {
+                type: "button",
+                to: "#description",
+                title: "Show description",
+                icon: "\uf039",
+                text: "Description"
+            },
+            {
+                to: "styles.css",
+                title: "Show stylsheet",
+                icon: "\uf1fc",
+                text: "Styles"
+            },
+            {
+                to: "https://github.com/joeleisner/illustrative-code/tree/master/src/pages/projects/" + date,
+                title: "Github repo page",
+                icon: "\uf126",
+                text: "Github"
+            }
+        ]
+
+block head
+    //- Title
+    title #{ title }, an Illustrative Code example
+    //- Demo styles
+    link(
+        rel="stylesheet"
+        href="styles.css"
+    )
+
+block body
+    h1.sr-only=title
+    section(id="demo", aria-label="demo", aria-hidden="false")
+        block demo
+    section(id="description", aria-label="description", aria-hidden="true")
+        block description
+
+block scripts
+    //- Project JS
+    script(
+        src="/illustrative-code/assets/js/project.js"
+    )

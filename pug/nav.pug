@@ -1,0 +1,39 @@
+mixin nav__link(instructions)
+    -
+        const {
+            type = "link",
+            to,
+            title,
+            icon,
+            family,
+            text,
+            active = false
+        } = instructions
+        let classes = [ "nav__link" ]
+        if (active) classes.push("nav__link--active")
+        const target = to.includes("http") ? "_blank" : false
+    if type === "link"
+        a(
+            class=classes.join(' ')
+            href=to
+            title=title
+            target=target
+            data-icon=icon
+            data-family=family
+        )
+            span.nav__text=text
+    if type === "button"
+        button(
+            class=classes.join(' ')
+            aria-controls=to
+            title=title
+            data-icon=icon
+            data-family=family
+        )
+            span.nav__text=text
+
+mixin nav(links = [])
+    nav.nav
+        .nav__container
+            each link in links
+                +nav__link(link)

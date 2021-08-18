@@ -1,0 +1,24 @@
+// Home logo
+
+@use "../shared/media";
+@use "../shared/style";
+
+$fill: style.color("slate");
+$fill--dark: style.color("white");
+
+.logo {
+    --fill: #{$fill};
+    max-width: 600px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    fill: var(--fill);
+
+    @include media.theme("light") {
+        --fill: #{$fill};
+    }
+
+    @include media.theme("dark") {
+        --fill: #{$fill--dark};
+    }
+}

@@ -1,54 +1,29 @@
-extends ../pug/templates/home
+extends ../pug/home
 
 block content
-    .container
-        .row
+    .grid
+        .grid__item--full
             include ../images/logo.svg
-        .row
-            .col.full
-                h1.sr-only Illustrative Code
-                include:markdown-it readme.md
-        .row
-            .col
-                +card("2017/10/2", "Hammer & Anvil")
-            .col
-                +card("2017/10/4", "Plastic Bag")
-            .col
-                +card("2017/10/6", "Palindrome Loader")
-            .col
-                +card("2017/10/7", "Composition II in Red, Blue, and Yellow")
-        .row
-            .col
-                +card("2017/10/9", "Mailbox")
-            .col
-                +card("2017/10/11", "Rainbow Loader")
-            .col
-                +card("2017/10/12", "Lego Head")
-            .col
-                +card("2017/10/16", "Speech Bubble")
-        .row
-            .col
-                +card("2017/10/18", "iPhone 7+")
-            .col
-                +card("2017/10/21", "Pint o' Beer")
-            .col
-                +card("2017/10/22", "Ruby")
-            .col
-                +card("2017/10/23", "Mini Synthesizer")
-        .row
-            .col
-                +card("2017/10/24", "Sushi")
-            .col
-                +card("2017/10/25", "Key")
-            .col
-                +card("2017/10/27", "Ripple Loader")
-            .col
-                +card("2017/10/29", "iPhone 7+ (Redo)")
-        .row
-            .col
-                +card("2017/10/30", "Creative Sprint Trophy")
-    footer#footer
-        .container
-            .row
-                .col.full
-                    p This site was made with <i class="fa fa-heart"><span class="sr-only">love</span></i> by Joel Eisner, and is <a href="https://www.w3.org/TR/WCAG20/" target="_blank">WCAG 2.0 AA</a> accessibile.
+        .grid__item--full
+            h1.sr-only Illustrative Code
+            include:markdown-it readme.md
+        +card("2017/10/2", "Hammer & Anvil")
+        +card("2017/10/4", "Plastic Bag")
+        +card("2017/10/6", "Palindrome Loader")
+        +card("2017/10/7", "Composition II in Red, Blue, and Yellow")
+        +card("2017/10/9", "Mailbox")
+        +card("2017/10/11", "Rainbow Loader")
+        +card("2017/10/12", "Lego Head")
+        +card("2017/10/16", "Speech Bubble")
+        +card("2017/10/18", "iPhone 7+")
+        +card("2017/10/21", "Pint o' Beer")
+        +card("2017/10/22", "Ruby")
+        +card("2017/10/23", "Mini Synthesizer")
+        +card("2017/10/24", "Sushi")
+        +card("2017/10/25", "Key")
+        +card("2017/10/27", "Ripple Loader")
+        +card("2017/10/29", "iPhone 7+ (Redo)")
+        +card("2017/10/30", "Creative Sprint Trophy")
+    footer.footer
+        .footer__container
+            p This site was made with <i class="fa fa-heart"><span class="sr-only">love</span></i> by Joel Eisner, and is <a href="https://www.w3.org/TR/WCAG20/" target="_blank">WCAG 2.0 AA</a> accessibile.

@@ -1,7 +1,7 @@
 // Project sections
 
-@use "../modules/media";
-@use "../modules/style";
+@use "../shared/media";
+@use "../shared/style";
 
 section {
     flex: 0;
@@ -24,19 +24,8 @@ section {
     }
 
     &#description {
-        padding: 30px;
+        padding: 2rem;
         @include style.container;
-
-        h1 {
-            font-size: 2em;
-        }
-
-        h1,
-        p {
-            margin: 0 0 15px 0;
-            line-height: 1.25em;
-            text-align: center;
-        }
     }
 
     &#demo {

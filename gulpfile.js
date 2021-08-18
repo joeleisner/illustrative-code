@@ -69,22 +69,12 @@ function pugTask({ src }) {
         .pipe(browserSync.stream());
 }
 
-// Turn global PUG into HTML
-export function globalPug() {
-    return pugTask({
-        src: 'pug/*.pug'
-    });
-}
-
-// Turn project PUG into HTML
-export function projectPug() {
+// Turn PUG pages into HTML
+export function pug() {
     return pugTask({
         src: 'pages/**/index.pug'
     });
 }
-
-// Turn PUG into HTML
-export const pug = gulp.parallel(globalPug, projectPug);
 
 // Define a generic SASS to CSS task
 function sassTask({ src, dest }) {
@@ -102,7 +92,7 @@ function sassTask({ src, dest }) {
 // Turn global SASS into CSS
 export function globalSass() {
     return sassTask({
-        src: 'scss/{home,project}.scss',
+        src: 'scss/global.scss',
         dest: 'dist/illustrative-code/assets/css'
     });
 }
@@ -110,7 +100,7 @@ export function globalSass() {
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
-        src: 'pages/**/styles.sass',
+        src: 'pages/**/styles.{sass,scss}',
         dest: 'dist/illustrative-code'
     });
 }
@@ -131,12 +121,17 @@ export function serve() {
 
 // Watch for source file changes
 export function watch() {
-    gulp.watch(['images/**/*'], img);
-    gulp.watch(['js/**/*.js'], js);
-    gulp.watch(['{pages,pug}/**/*.{md,pug}'], pug);
     gulp.watch([
-        'scss/**/*.scss',
-        'pages/**/*.{sass,scss}'
+        'images/**/*'
+    ], img);
+    gulp.watch([
+        'js/**/*.js'
+    ], js);
+    gulp.watch([
+        '{pages,pug}/**/*.{md,pug}'
+    ], pug);
+    gulp.watch([
+        '{pages,scss,shared}/**/*.{sass,scss}'
     ], sass);
 }
 
