@@ -5,7 +5,10 @@ include ../components/nav/index
 include ../components/wrapper/index
 
 doctype html
-html(lang="en")
+html(
+    lang="en"
+    data-theme=theme
+)
     head
         //- Meta
         meta(charset="utf-8")
@@ -19,14 +22,14 @@ html(lang="en")
         link(
             rel="icon" 
             type="image/png" 
-            href="/illustrative-code/assets/images/favicon.png"
+            href="/illustrative-code/images/favicon.png"
         )
         //- CSS
         link(
             rel="stylesheet"
-            href="/illustrative-code/assets/css/site.css"
+            href="/illustrative-code/site.css"
         )
-    body(data-theme=theme)
+    body
         //- Navigation
         +nav(nav)
         //- Page body
@@ -36,5 +39,5 @@ html(lang="en")
             block footer
         //- Page scripts
         script(
-            src="/illustrative-code/assets/js/site.js"
+            src="/illustrative-code/site.js"
         )

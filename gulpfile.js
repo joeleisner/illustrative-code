@@ -28,7 +28,7 @@ export function optimizeImages() {
 
     return gulp.src('images/**/*')
         .pipe(imagemin({ verbose }))
-        .pipe(gulp.dest('dist/assets/images'))
+        .pipe(gulp.dest('build/images'))
         .pipe(browserSync.stream());
 }
 
@@ -40,7 +40,7 @@ export function resizeImages() {
             height: 60
         }))
         .pipe(rename({ suffix: '.tiny' }))
-        .pipe(gulp.dest('dist/assets/images'))
+        .pipe(gulp.dest('build/images'))
         .pipe(browserSync.stream());
 }
 
@@ -55,7 +55,7 @@ export function js() {
     return gulp.src('site.js')
         .pipe(named())
         .pipe(webpackStream(options, webpack))
-        .pipe(gulp.dest('dist/assets/js'))
+        .pipe(gulp.dest('build'))
         .pipe(browserSync.stream());
 }
 
@@ -73,7 +73,7 @@ function pugTask({ src, dest }) {
 export function homePug() {
     return pugTask({
         src: 'index.pug',
-        dest: 'dist'
+        dest: 'build'
     });
 }
 
@@ -81,7 +81,7 @@ export function homePug() {
 export function projectPug() {
     return pugTask({
         src: 'projects/**/index.pug',
-        dest: 'dist/projects'
+        dest: 'build/projects'
     });
 }
 
@@ -89,10 +89,10 @@ export function projectPug() {
 export const pug = gulp.parallel(homePug, projectPug);
 
 // Define a generic SASS to CSS task
-function sassTask({ src, dest }) {
+function sassTask({ src, dest, minify = true }) {
     let plugins = [autoprefixer];
 
-    if (inProduction) plugins.push(cssnano);
+    if (inProduction && minify !== false) plugins.push(cssnano);
 
     return gulp.src(src)
         .pipe(transpiler({ fiber }))
@@ -105,7 +105,7 @@ function sassTask({ src, dest }) {
 export function siteSass() {
     return sassTask({
         src: 'site.scss',
-        dest: 'dist/assets/css'
+        dest: 'build'
     });
 }
 
@@ -113,22 +113,23 @@ export function siteSass() {
 export function projectSass() {
     return sassTask({
         src: 'projects/**/project.{sass,scss}',
-        dest: 'dist/projects'
+        dest: 'build/projects',
+        minify: false
     });
 }
 
 // Turn SASS into CSS
 export const sass = gulp.parallel(siteSass, projectSass);
 
-// Serve the "dist" directory on localhost
+// Serve the "build" directory on localhost
 export function serve() {
     browserSync.init({
         notify: false,
         open: false,
         server: {
-            baseDir: 'dist',
+            baseDir: 'build',
             routes: {
-                '/illustrative-code': 'dist'
+                '/illustrative-code': 'build'
             }
         },
         startPath: '/illustrative-code'
@@ -156,5 +157,5 @@ export function watch() {
 // Build all assets
 export const build = gulp.parallel(img, js, pug, sass);
 
-// Build all assets, serve the "dist" directory, and watch for changes
+// Build all assets, serve the "build" directory, and watch for changes
 export const develop = gulp.series(build, gulp.parallel(serve, watch));
