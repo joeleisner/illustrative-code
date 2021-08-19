@@ -1,6 +1,7 @@
 // JS cookie library
 import Cookies from 'js-cookie';
 
+// Navigation functionality
 export class Nav {
     constructor() {}
 

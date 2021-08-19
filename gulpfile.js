@@ -112,7 +112,7 @@ export function siteSass() {
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
-        src: 'projects/**/styles.{sass,scss}',
+        src: 'projects/**/project.{sass,scss}',
         dest: 'dist/projects'
     });
 }

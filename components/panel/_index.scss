@@ -1,4 +1,4 @@
-// Project sections
+// Panel styles
 
 @use "../../shared/media";
 @use "../../shared/style";
@@ -12,7 +12,6 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    color: style.color("white");
     overflow: hidden;
 
     &[aria-hidden="false"] {

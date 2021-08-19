@@ -1,3 +1,4 @@
+// Card functionality
 export class Card {
     constructor() {
         this.references = [];
