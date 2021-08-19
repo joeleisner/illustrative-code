@@ -1,0 +1,19 @@
+mixin panel(settings)
+    -
+        const {
+            id,
+            label,
+            contain = false,
+            visible = false
+        } = settings
+    section(
+        id=id
+        class="panel"
+        aria-label=label
+        aria-hidden=String(!visible)
+    )
+        if contain
+            .panel__container
+                block
+        else
+            block

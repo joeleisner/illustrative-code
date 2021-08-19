@@ -1,0 +1,19 @@
+extends ../../../../shared/project
+
+block vars
+    - var title = "iPhone 7+"
+    - var date = "2017/10/18"
+
+block description
+    include:markdown-it readme.md
+
+block demo
+    #phone
+        .face
+            .forehead
+                .bar
+                    .camera
+                    .speaker
+            .screen
+            .chin
+                .home-btn

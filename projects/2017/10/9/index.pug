@@ -1,0 +1,14 @@
+extends ../../../../shared/project
+
+block vars
+    - var title = "Mailbox"
+    - var date = "2017/10/9"
+
+block description
+    include:markdown-it readme.md
+
+block demo
+    #mailbox
+        .flag
+            .staff
+            .fly

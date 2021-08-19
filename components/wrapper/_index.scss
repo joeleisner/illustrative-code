@@ -1,0 +1,25 @@
+// Wrapper styles
+
+@use "../../shared/media";
+
+$offset: 4rem;
+$offset--sm: 3rem;
+
+.wrapper {
+    --offset: #{$offset};
+    --min-height: calc(100vh - var(--offset));
+    width: 100%;
+    min-height: var(--min-height);
+    margin-bottom: var(--offset);
+
+    @include media.breakpoint {
+        --offset: #{$offset--sm};
+        margin-bottom: 0;
+        margin-top: var(--offset);
+    }
+
+    main {
+        display: flex;
+        min-height: var(--min-height);
+    }
+}

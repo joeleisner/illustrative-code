@@ -28,7 +28,7 @@ export function optimizeImages() {
 
     return gulp.src('images/**/*')
         .pipe(imagemin({ verbose }))
-        .pipe(gulp.dest('dist/illustrative-code/assets/images'))
+        .pipe(gulp.dest('dist/assets/images'))
         .pipe(browserSync.stream());
 }
 
@@ -40,7 +40,7 @@ export function resizeImages() {
             height: 60
         }))
         .pipe(rename({ suffix: '.tiny' }))
-        .pipe(gulp.dest('dist/illustrative-code/assets/images'))
+        .pipe(gulp.dest('dist/assets/images'))
         .pipe(browserSync.stream());
 }
 
@@ -52,29 +52,41 @@ export function js() {
     const mode = MODE;
     const options = Object.assign({ mode }, webpackConfig);
 
-    return gulp.src('js/*.js')
+    return gulp.src('site.js')
         .pipe(named())
         .pipe(webpackStream(options, webpack))
-        .pipe(gulp.dest('dist/illustrative-code/assets/js'))
+        .pipe(gulp.dest('dist/assets/js'))
         .pipe(browserSync.stream());
 }
 
 // Define a generic PUG to HTML task
-function pugTask({ src }) {
+function pugTask({ src, dest }) {
     const pretty = inDevelopment;
 
     return gulp.src(src)
         .pipe(gulpPug({ pretty }))
-        .pipe(gulp.dest('dist/illustrative-code'))
+        .pipe(gulp.dest(dest))
         .pipe(browserSync.stream());
 }
 
-// Turn PUG pages into HTML
-export function pug() {
+// Transpile the homepage
+export function homePug() {
     return pugTask({
-        src: 'pages/**/index.pug'
+        src: 'index.pug',
+        dest: 'dist'
     });
 }
+
+// Transpile the project pages
+export function projectPug() {
+    return pugTask({
+        src: 'projects/**/index.pug',
+        dest: 'dist/projects'
+    });
+}
+
+// Turn PUG into HTML
+export const pug = gulp.parallel(homePug, projectPug);
 
 // Define a generic SASS to CSS task
 function sassTask({ src, dest }) {
@@ -89,24 +101,24 @@ function sassTask({ src, dest }) {
         .pipe(browserSync.stream());
 }
 
-// Turn global SASS into CSS
-export function globalSass() {
+// Turn site SASS into CSS
+export function siteSass() {
     return sassTask({
-        src: 'scss/global.scss',
-        dest: 'dist/illustrative-code/assets/css'
+        src: 'site.scss',
+        dest: 'dist/assets/css'
     });
 }
 
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
-        src: 'pages/**/styles.{sass,scss}',
-        dest: 'dist/illustrative-code'
+        src: 'projects/**/styles.{sass,scss}',
+        dest: 'dist/projects'
     });
 }
 
 // Turn SASS into CSS
-export const sass = gulp.parallel(globalSass, projectSass);
+export const sass = gulp.parallel(siteSass, projectSass);
 
 // Serve the "dist" directory on localhost
 export function serve() {
@@ -114,25 +126,31 @@ export function serve() {
         notify: false,
         open: false,
         server: {
-            baseDir: './dist'
-        }
+            baseDir: 'dist',
+            routes: {
+                '/illustrative-code': 'dist'
+            }
+        },
+        startPath: '/illustrative-code'
     });
 }
 
 // Watch for source file changes
 export function watch() {
+    gulp.watch('images/**/*', img);
     gulp.watch([
-        'images/**/*'
-    ], img);
-    gulp.watch([
-        'js/**/*.js'
+        'site.js',
+        '{components,projects,shared}/**/*.js'
     ], js);
     gulp.watch([
-        '{pages,pug}/**/*.{md,pug}'
+        'index.pug',
+        '{components,projects,shared}/**/*.{md,pug}'
     ], pug);
     gulp.watch([
-        '{pages,scss,shared}/**/*.{sass,scss}'
-    ], sass);
+        'site.scss',
+        '{components,shared}/**/*.scss'
+    ], siteSass);
+    gulp.watch('{projects,shared}/**/*.{sass,scss}', projectSass);
 }
 
 // Build all assets

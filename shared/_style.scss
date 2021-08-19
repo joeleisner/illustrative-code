@@ -51,7 +51,7 @@ $container--widths: (
 
     @each $breakpoint in $breakpoints {
         @include media.breakpoint($breakpoint) {
-            width: map.get($container--widths, $breakpoint);
+            max-width: map.get($container--widths, $breakpoint);
         }
     }
 }

@@ -1,0 +1,19 @@
+extends ../../../../shared/project
+
+block vars
+    - var title = "Hammer & Anvil"
+    - var date = "2017/10/2"
+
+block description
+    include:markdown-it readme.md
+
+block demo
+    #hammer
+        .head
+        .handle
+    #anvil
+        .horn
+        .body
+            .right-cutout
+            .bottom-cutout
+            .left-cutout

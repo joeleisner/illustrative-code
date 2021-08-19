@@ -1,0 +1,13 @@
+mixin card(path, title)
+    - var image = "/illustrative-code/assets/images/" + path.split("/").join("-")
+    a.card(
+        href="/illustrative-code/projects/" + path
+    )
+        .card__wrap.card__wrap--loading
+            img(
+                class="card__image card__image--loading"
+                src=image + ".tiny.jpg"
+                data-src=image + ".jpg"
+                alt=title
+                aria-label=title
+            )
