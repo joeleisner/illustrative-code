@@ -114,6 +114,7 @@ export class Nav {
     }
 
     documentOnScroll() {
+        if (this.references.nav.classList.contains('nav--shadowless')) return;
         document.addEventListener('scroll', this.toggleNavShadow.bind(this));
     }
 

@@ -45,6 +45,10 @@ $box-shadow--sm: 0px 0.5rem 1rem 0px var(--box-shadow-color);
         --box-shadow-color: #{$box-shadow-color--dark};
     }
 
+    &--shadowless {
+        box-shadow: none;
+    }
+
     @include media.breakpoint {
         --box-shadow: none;
         bottom: unset;

@@ -34,8 +34,11 @@ mixin nav__link(instructions)
             span.nav__text=text
 
 //- Navigation structure
-mixin nav(links = [])
-    nav.nav
+mixin nav(links = [], shadow = true)
+    -
+        let classes = [ "nav" ]
+        if (!shadow) classes.push("nav--shadowless")
+    nav(class=classes.join(' '))
         .nav__container
             each link in links
                 +nav__link(link)
