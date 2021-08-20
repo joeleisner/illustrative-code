@@ -26,33 +26,126 @@ export class Nav {
             return document.getElementById(id);
         });
 
+        // Next, get the theme toggle
+        const toggle = document.getElementById('nav__toggle');
+
         // Finally, store all references
         this.references = {
             nav,
             controls,
-            panels
+            panels,
+            toggle
         };
     }
 
-    // Get a nav cookie
-    getCookie() {
+    // Get a user theme
+    getUserTheme() {
+        console.log('Get user theme!');
+        // Attempt to get a saved user theme...
+        const cookie = Cookies.get('theme');
+        // ... and if none are found, store it as the system theme
+        if (!cookie) return this.theme.user = this.theme.system;
+
+        // Otherwise, store the saved user theme
+        this.theme.user = cookie;
+    }
+
+    // Set a user theme
+    setUserTheme(theme) {
+        console.log('Set user theme!');
+        // Add the theme to the document element's theme data,...
+        document.documentElement.setAttribute('data-theme', theme);
+         // ... set a cookie expiration date of 1 year,..
+        const expires = 365;
+        // ... and store the user theme as a cookie
+        Cookies.set('theme', theme, { expires });
+    }
+
+    // Remove a user theme
+    removeUserTheme() {
+        console.log('Remove user theme!');
+        // Remove the document element's theme data...
+        document.documentElement.removeAttribute('data-theme');
+        // ... and remove any theme override cookies
+        Cookies.remove('theme');
+    }
+
+    // Update the theme toggle
+    updateThemeToggle() {
+        // Generate a title to use
+        const title = `Toggle on ${ this.theme.user === 'light' ? 'dark' : 'light' } mode`;
+        // Set the toggle's title,...
+        this.references.toggle.title = title;
+        // ... aria-label,...
+        this.references.toggle.setAttribute('aria-label', title);
+        // ... icon,...
+        this.references.toggle.dataset.icon = this.theme.user === 'light' ? '\uf186' : '\uf185';
+        // ... and text that is opposite of the current user theme
+        this.references.toggle.querySelector('.nav__text').textContent = `${ this.theme.user === 'light' ? 'Dark' : 'Light' } mode`;
+    }
+
+    // Change the user theme
+    changeTheme(forced) {
+        // Get the stored user theme
+        const { user } = this.theme;
+
+        // Generate the user theme
+        const theme = forced
+            ? forced
+            : user === 'light'
+            ? 'dark'
+            : 'light';
+        // ... and store it
+        this.theme.user = theme;
+
+        // Next, update the theme toggle
+        this.updateThemeToggle();
+
+        // Finally, either remove or set the user theme
+        return this.theme.system === this.theme.user
+            ? this.removeUserTheme()
+            : this.setUserTheme(theme);
+    }
+
+    // Setup site theming
+    setupTheme() {
+        if (!this.references.toggle) return;
+
+        this.theme = {};
+
+        const { matches: systemDarkMode } = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+        );
+
+        this.theme.system = systemDarkMode ? 'dark' : 'light';
+        this.getUserTheme();
+
+        console.log(this.theme);
+
+        this.changeTheme(this.theme.user);
+
+        this.references.toggle.addEventListener('click', () => this.changeTheme.bind(this)());
+    }
+
+    // Get the nav state stored as a cookie
+    getNavState() {
         // First, store the location path
         this.path = window.location.pathname;
 
         // Next, attempt to get this page's nav cookie,...
-        const cookie = Cookies.get('nav');
+        const cookie = Cookies.get('nav--state');
         // ... and if none exists, do nothing else
         if (!cookie) return;
 
         // Finally, store the cookie
-        this.cookie = cookie;
+        this.state = cookie;
     }
 
     // Restore a panel to show
     restorePanel() {
-        if (!this.cookie) return;
+        if (!this.state) return;
 
-        const control = this.references.controls.find(control => this.controls(control) === this.cookie);
+        const control = this.references.controls.find(control => this.controls(control) === this.state);
 
         if (!control) return;
 
@@ -61,10 +154,10 @@ export class Nav {
         this.toggleControlsAndPanels({ control, panel });
     }
 
-    // Save a nav cookie
-    setCookie(id) {
+    // Save the nav state as a cookie
+    setNavState(id) {
         const { path } = this;
-        Cookies.set('nav', id, { path });
+        Cookies.set('nav--state', id, { path });
     }
 
     // Sets a nav control to active/inactive
@@ -93,7 +186,7 @@ export class Nav {
                 targetControl = event.currentTarget;
                 targetPanel = this.references.panels.find(({ id }) => id === this.controls(targetControl));
                 event.preventDefault();
-                this.setCookie(targetPanel.id);
+                this.setNavState(targetPanel.id);
         }
 
         this.references.controls.forEach(control => this.setControlActive(control, control === targetControl));
@@ -123,10 +216,12 @@ export class Nav {
         // First, attempt to store all nav references
         this.store();
 
-        // Next, attempt to get a nav cookie
-        this.getCookie();
+        // Next, setup site theming
+        this.setupTheme();
 
-        // Next, show a nav if a cookie has been found
+        // Next, attempt to get a saved nav state...
+        this.getNavState();
+        // ... and restore a panel's visibility if found
         this.restorePanel();
 
         // Finally, bind to all nav control clicks...

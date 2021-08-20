@@ -3,6 +3,7 @@ mixin nav__link(instructions)
     -
         const {
             type = "link",
+            id,
             to,
             title,
             icon,
@@ -12,12 +13,14 @@ mixin nav__link(instructions)
         } = instructions
         let classes = [ "nav__link" ]
         if (active) classes.push("nav__link--active")
-        const target = to.includes("http") ? "_blank" : false
     if type === "link"
+        - const target = to.includes("http") ? "_blank" : false
         a(
+            id=id
             class=classes.join(' ')
             href=to
             title=title
+            aria-label=title
             target=target
             data-icon=icon
             data-family=family
@@ -25,9 +28,11 @@ mixin nav__link(instructions)
             span.nav__text=text
     if type === "button"
         button(
+            id=id
             class=classes.join(' ')
             aria-controls=to
             title=title
+            aria-label=title
             data-icon=icon
             data-family=family
         )
