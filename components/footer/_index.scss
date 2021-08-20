@@ -29,5 +29,9 @@ $background-color--dark: style.darken("slate", 4%);
     &__container {
         padding: 1rem 2rem;
         @include style.container;
+
+        p {
+            margin: 0;
+        }
     }
 }
