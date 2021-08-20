@@ -5,9 +5,10 @@
 
 // Colors
 
-$bag: style.darken("white", 5%);
-$bag--dark: style.color("white");
-$red: #d32f2f;
+$bag-color: style.darken("white", 10%);
+$bag-color--dark: style.color("white");
+$text-color: #C62828;
+$text-color--dark: #d32f2f;
 
 // Typography
 
@@ -16,7 +17,8 @@ $font-size: 24px;
 $font-weight: 900;
 
 #bag {
-    --bag: #{$bag};
+    --bag: #{$bag-color};
+    --text: #{$text-color};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,14 +29,16 @@ $font-weight: 900;
     font-family: $font-family;
     font-size: $font-size;
     font-weight: $font-weight;
-    color: $red;
+    color: var(--text);
 
     @include media.theme("light") {
-        --bag: #{$bag};
+        --bag: #{$bag-color};
+        --text: #{$text-color};
     }
 
     @include media.theme("dark") {
-        --bag: #{$bag--dark};
+        --bag: #{$bag-color--dark};
+        --text: #{$text-color--dark};
     }
 
     .cutout {
@@ -66,7 +70,7 @@ $font-weight: 900;
             &.outline {
                 -webkit-text-fill-color: var(--bag);
                 -webkit-text-stroke-width: 1px;
-                -webkit-text-stroke-color: $red;
+                -webkit-text-stroke-color: var(--text);
             }
 
             &.tiny {
