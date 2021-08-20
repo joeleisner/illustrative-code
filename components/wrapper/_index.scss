@@ -8,6 +8,8 @@ $offset--sm: 3rem;
 .wrapper {
     --offset: #{$offset};
     --min-height: calc(100vh - var(--offset));
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-height: var(--min-height);
     margin-bottom: var(--offset);
@@ -19,7 +21,7 @@ $offset--sm: 3rem;
     }
 
     main {
+        flex: 1;
         display: flex;
-        min-height: var(--min-height);
     }
 }
