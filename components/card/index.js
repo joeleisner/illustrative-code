@@ -85,7 +85,7 @@ export class Card {
 
             // Finally, update the references to remove any deleted cards
             this.references = this.references.filter(Boolean);
-        }, 20)
+        }, 20);
     }
 
     // Lazy load the cards when the screen changes (scrolled, resized, rotated)
