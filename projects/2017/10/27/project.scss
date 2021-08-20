@@ -1,0 +1,47 @@
+// Ripple loader styles
+
+@keyframes expand {
+    0% {
+        width: 0px;
+        height: 0px;
+        border-width: 0px;
+        opacity: 1;
+    } 50% {
+        width: 90px;
+        height: 90px;
+        border-width: 10px;
+        opacity: 1;
+    } 100% {
+        width: 180px;
+        height: 180px;
+        border-width: 0px;
+        opacity: 1;
+    }
+}
+
+#loader,
+#loader .circle {
+    width: 180px;
+    height: 180px;
+}
+
+#loader {
+    position: relative;
+
+    .circle {
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-style: solid;
+        border-color: var(--color);
+        border-radius: 100%;
+        transform: translateY(-50%) translateX(-50%);
+        animation: expand 2s linear infinite;
+        opacity: 0;
+    }
+
+    *:nth-child(2) {
+        animation-delay: 0.5s;
+    }
+}

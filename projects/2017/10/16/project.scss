@@ -1,0 +1,57 @@
+// Speech bubble styles
+
+@keyframes dot {
+    from, 30%, 45%, 55%, 65%, to {
+        animation-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1);
+        transform: translateY(0);
+    } 35%, 40% {
+        animation-timing-function: cubic-bezier(0.7, 0.1, 0.9, 0.1);
+        transform: translateY(-20px);
+    } 50% {
+        animation-timing-function: cubic-bezier(0.7, 0.1, 0.9, 0.1);
+        transform: translateY(-10px);
+    } 60% {
+        transform: translateY(-5px);
+    }
+}
+
+#bubble {
+    display: flex;
+    flex-direction: column;
+
+    .body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 180px;
+        height: 120px;
+        border-radius: 30px;
+        background-color: var(--color);
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 100%;
+            background-color: var(--background-color);
+            animation: dot 3s infinite;
+
+            &:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+
+            &:last-child {
+                margin-right: 0;
+                animation-delay: 0.2s;
+            }
+        }
+    }
+
+    .pointer {
+        width: 0px;
+        height: 0px;
+        margin-left: 30px;
+        border-top: 30px solid var(--color);
+        border-right: 30px solid transparent;
+    }
+}

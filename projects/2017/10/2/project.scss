@@ -1,0 +1,87 @@
+// Hammer & anvil styles
+
+// Hammer
+
+@keyframes hammer {
+    from {
+        transform: rotate(45deg) translateX(30px);
+    } to {
+        transform: rotate(0deg) translateX(30px);
+    }
+}
+
+#hammer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 120px;
+    height: 60px;
+    transform-origin: 100% 50%;
+    animation: hammer 1s infinite alternate;
+
+    * {
+        background-color: var(--color);
+    }
+
+    .head {
+        width: 30px;
+        height: 60px;
+    }
+
+    .handle {
+        flex: 1 0 auto;
+        height: 10px;
+        margin-left: -35px;
+    }
+}
+
+// Anvil
+
+#anvil {
+    display: flex;
+    width: 180px;
+    height: 80px;
+
+    .horn {
+        width: 0;
+        height: 0;
+        margin-top: 10px;
+        border-top: 20px solid var(--color);
+        border-left: 60px solid transparent;
+    }
+
+    .body {
+        position: relative;
+        width: 120px;
+        height: 80px;
+        background-color: var(--color);
+        overflow: hidden;
+
+        [class$='-cutout'] {
+            position: absolute;
+            border-radius: 100%;
+            background-color: var(--background-color);
+        }
+
+        .right-cutout {
+            top: 10px;
+            right: -30px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .bottom-cutout {
+            bottom: -15px;
+            left: 45px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .left-cutout {
+            top: 30px;
+            left: -30px;
+            width: 60px;
+            height: 40px;
+        }
+    }
+}

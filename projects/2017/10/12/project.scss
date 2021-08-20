@@ -1,0 +1,75 @@
+// Lego head styles
+
+@use "../../../../shared/style";
+
+$amber: #FFC107;
+
+#head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    height: 220px;
+
+    * {
+        background-color: $amber;
+    }
+
+    .stud {
+        height: 20px;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .stud,
+    .neck {
+        width: 90px;
+    }
+
+    .neck {
+        height: 10px;
+        border-radius: 0 0 2px 2px;
+    }
+
+    .face {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 180px;
+        height: 180px;
+        border-radius: 45px;
+
+        .eyes {
+            display: flex;
+            justify-content: space-between;
+            width: 90px;
+            height: 20px;
+            margin-top: 10px;
+
+            .eye {
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                background-color: style.color("black");
+            }
+        }
+
+        .smile {
+            position: relative;
+            box-sizing: border-box;
+            width: 70px;
+            height: 30px;
+            margin-top: 15px;
+            border-radius: 100%;
+            border: 8px solid style.color("black");
+
+            .mask {
+                position: absolute;
+                top: -8px;
+                left: -8px;
+                width: 70px;
+                height: 15px;
+            }
+        }
+    }
+}

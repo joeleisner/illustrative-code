@@ -1,0 +1,57 @@
+// Ruby styles
+
+$red-500: #f44336;
+$red-600: #e53935;
+$red-700: #d32f2f;
+$red-800: #c62828;
+$red-900: #b71c1c;
+
+#ruby {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .top,
+    .bottom {
+        display: flex;
+    }
+
+    .triangle {
+        width: 0;
+        height: 0;
+    }
+
+    .top .triangle {
+        border-right: 90px solid transparent;
+        border-left: 90px solid transparent;
+
+        &:nth-child(1) {
+            border-bottom: 90px solid $red-500;
+        }
+
+        &:nth-child(2) {
+            margin-left: -90px;
+            margin-right: -90px;
+            border-top: 90px solid $red-600;
+        }
+
+        &:nth-child(3) {
+            border-bottom: 90px solid $red-700;
+        }
+    }
+
+    .bottom .triangle {
+        border-top: 180px solid transparent;
+
+        &:nth-child(1) {
+            border-top-color: $red-800;
+            border-left: 180px solid transparent;
+        }
+
+        &:nth-child(2) {
+            border-top-color: $red-900;
+            border-right: 180px solid transparent;
+        }
+    }
+}
