@@ -108,10 +108,10 @@ export function projectPug() {
 export const pug = gulp.parallel(homePug, projectPug);
 
 // Define a generic SASS to CSS task
-function sassTask({ src, dest, minify = true }) {
+function sassTask({ src, dest }) {
     let plugins = [autoprefixer];
 
-    if (inProduction && minify !== false) plugins.push(cssnano);
+    if (inProduction) plugins.push(cssnano);
 
     return gulp.src(src)
         .pipe(transpiler({ fiber }))
@@ -132,8 +132,7 @@ export function siteSass() {
 export function projectSass() {
     return sassTask({
         src: 'projects/**/project.scss',
-        dest: 'build/projects',
-        minify: false
+        dest: 'build/projects'
     });
 }
 
