@@ -14,13 +14,16 @@ mixin nav__link(instructions)
         let classes = [ "nav__link" ]
         if (active) classes.push("nav__link--active")
     if type === "link"
-        - const target = to.includes("http") ? "_blank" : false
+        - const external = to.includes("http")
+        - const rel = external ? "noopener noreferrer" : false
+        - const target = external ? "_blank" : false
         a(
             id=id
             class=classes.join(' ')
             href=to
             title=title
             aria-label=title
+            rel=rel
             target=target
             data-icon=icon
             data-family=family
