@@ -28,7 +28,7 @@ block settings
             },
             {
                 to: "project.css",
-                title: "Show stylesheet",
+                title: "Show styles",
                 icon: "\uf1fc",
                 text: "Styles"
             },
@@ -71,3 +71,9 @@ block body
         contain: true
     })
         block description
+
+block scripts
+    if script
+        script(
+            src="project.js"
+        )

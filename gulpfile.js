@@ -7,7 +7,7 @@ import gulpPug from 'gulp-pug';
 import gulpSass from 'gulp-sass';
 import imagemin from 'gulp-imagemin';
 import imageResize from 'gulp-image-resize';
-import named from 'vinyl-named';
+import named from 'vinyl-named-with-path';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import sassCompiler from 'sass';
@@ -47,17 +47,36 @@ export function resizeImages() {
 // Optimize and resize images
 export const img = gulp.parallel(optimizeImages, resizeImages);
 
-// Transpile JS
-export function js() {
+// Define a generic JS task
+function jsTask({ src, dest }) {
     const mode = MODE;
     const options = Object.assign({ mode }, webpackConfig);
 
-    return gulp.src('site.js')
+    return gulp.src(src)
         .pipe(named())
         .pipe(webpackStream(options, webpack))
-        .pipe(gulp.dest('build'))
+        .pipe(gulp.dest(dest))
         .pipe(browserSync.stream());
 }
+
+// Transpile site JS
+export function siteJs() {
+    return jsTask({
+        src: 'site.js',
+        dest: 'build'
+    });
+}
+
+// Transpile project JS
+export function projectJs() {
+    return jsTask({
+        src: 'projects/**/project.js',
+        dest: 'build/projects'
+    });
+}
+
+// Transpile JS
+const js = gulp.parallel(siteJs, projectJs);
 
 // Define a generic PUG to HTML task
 function pugTask({ src, dest }) {
@@ -112,7 +131,7 @@ export function siteSass() {
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
-        src: 'projects/**/project.{sass,scss}',
+        src: 'projects/**/project.scss',
         dest: 'build/projects',
         minify: false
     });
@@ -141,8 +160,9 @@ export function watch() {
     gulp.watch('images/**/*', img);
     gulp.watch([
         'site.js',
-        '{components,projects,shared}/**/*.js'
-    ], js);
+        '{components,shared}/**/*.js'
+    ], siteJs);
+    gulp.watch('{projects,shared}/**/*.js', projectJs);
     gulp.watch([
         'index.pug',
         '{components,projects,shared}/**/*.{md,pug}'
@@ -151,7 +171,7 @@ export function watch() {
         'site.scss',
         '{components,shared}/**/*.scss'
     ], siteSass);
-    gulp.watch('{projects,shared}/**/*.{sass,scss}', projectSass);
+    gulp.watch('{projects,shared}/**/*.scss', projectSass);
 }
 
 // Build all assets
