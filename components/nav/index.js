@@ -40,7 +40,6 @@ export class Nav {
 
     // Get a user theme
     getUserTheme() {
-        console.log('Get user theme!');
         // Attempt to get a saved user theme...
         const cookie = Cookies.get('theme');
         // ... and if none are found, store it as the system theme
@@ -52,7 +51,6 @@ export class Nav {
 
     // Set a user theme
     setUserTheme(theme) {
-        console.log('Set user theme!');
         // Add the theme to the document element's theme data,...
         document.documentElement.setAttribute('data-theme', theme);
          // ... set a cookie expiration date of 1 year,..
@@ -63,7 +61,6 @@ export class Nav {
 
     // Remove a user theme
     removeUserTheme() {
-        console.log('Remove user theme!');
         // Remove the document element's theme data...
         document.documentElement.removeAttribute('data-theme');
         // ... and remove any theme override cookies
@@ -119,8 +116,6 @@ export class Nav {
 
         this.theme.system = systemDarkMode ? 'dark' : 'light';
         this.getUserTheme();
-
-        console.log(this.theme);
 
         this.changeTheme(this.theme.user);
 
