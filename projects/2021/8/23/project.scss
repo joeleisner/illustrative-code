@@ -1,0 +1,275 @@
+// Gameboy Color styles
+
+@use "sass:map";
+@use "sass:math";
+@use "../../../../shared/animate";
+@use "../../../../shared/media";
+@use "../../../../shared/style";
+
+// Colors
+
+$colors: (
+    "atomic-purple": #7f00ff,
+    "indigo": #3738A2,
+    "berry": #ED1568,
+    "kiwi": #A8F803,
+    "dandelion": #E7A801,
+    "teal": #1391C4
+);
+
+@mixin color($name) {
+    &.#{$name} {
+        background-color: map.get($colors, $name);
+    }
+}
+
+// Gameboy
+
+$highlight: rgba(style.color("white"), 0.25);
+$shadow: rgba(style.color("black"), 0.25);
+
+$width: 156px;
+$height: 267px;
+$border-radius--top: 4px;
+$border-radius--bottom: 50% 12px;
+
+$box-shadow-color: rgba(style.color("slate"), 0.5);
+$box-shadow-color--dark: rgba(style.color("black"), 0.5);
+
+#gameboy {
+    --box-shadow-color: #{$box-shadow-color};
+    position: relative;
+    width: $width;
+    height: $height;
+    border-top-left-radius: $border-radius--top;
+    border-top-right-radius: $border-radius--top;
+    border-bottom-right-radius: $border-radius--bottom;
+    border-bottom-left-radius: $border-radius--bottom;
+    border-top: 4px solid $highlight;
+    border-bottom: 4px solid $shadow;
+    box-shadow: 0px 10px 20px var(--box-shadow-color);
+    @include animate.transition(background-color);
+
+    @include media.theme("light") {
+        --box-shadow-color: #{$box-shadow-color};
+    }
+
+    @include media.theme("dark") {
+        --box-shadow-color: #{$box-shadow-color--dark};
+    }
+
+    // Colors
+
+    @each $name in map.keys($colors) {
+        @include color($name);
+    }
+
+    // Screen
+
+    $screen__margin--sides: auto;
+    $screen__margin--top: 10px;
+    $screen__width: $width - ($screen__margin--top * 2);
+    $screen__height: math.round(math.div(52, 59) * $screen__width);
+    $screen__border-radius--top: 2px;
+    $screen__border-radius--bottom: 50% 6px;
+
+    .screen {
+        position: relative;
+        width: $screen__width;
+        height: $screen__height;
+        background-color: style.color("slate");
+        margin-left: $screen__margin--sides;
+        margin-top: $screen__margin--top;
+        margin-right: $screen__margin--sides;
+        border-top-left-radius: $screen__border-radius--top;
+        border-top-right-radius: $screen__border-radius--top;
+        border-bottom-right-radius: $screen__border-radius--bottom;
+        border-bottom-left-radius: $screen__border-radius--bottom;
+        border-top: 4px solid $shadow;
+
+        // Power LED
+
+        $power__size: 4px;
+        $power__color: red;
+
+        .power {
+            position: absolute;
+            left: 12px;
+            top: 25%;
+            width: $power__size;
+            height: $power__size;
+            background-color: $power__color;
+            border-radius: 100%;
+        }
+
+        // Display
+
+        $display__margin--sides: auto;
+        $display__margin--top: 10px;
+        $display__width: $screen__width - ($display__margin--top * 5);
+        $display__height: math.round(math.div(11, 12) * $display__width);
+
+        .display {
+            width: $display__width;
+            height: $display__height;
+            background-color: style.darken("slate", 10%);
+            margin-left: $display__margin--sides;
+            margin-top: $display__margin--top;
+            margin-right: $display__margin--sides;
+            border-radius: 2px;
+            border-top: 4px solid $shadow;
+        }
+    }
+
+    // Controls
+
+    $controls__padding--sides: 15px;
+
+    .controls {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding-left: $controls__padding--sides;
+        padding-right: $controls__padding--sides;
+
+        // D-Pad
+
+        $d-pad__size: 40px;
+
+        .d-pad {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: $d-pad__size;
+            height: $d-pad__size;
+
+            $arrows__size--a: $d-pad__size;
+            $arrows__size--b: math.round(math.div($d-pad__size, 2.5));
+
+            // Arrows
+
+            .left-right {
+                width: $arrows__size--a;
+                height: $arrows__size--b;
+            }
+
+            .left-right,
+            .up-down {
+                position: absolute;
+                background-color: style.color("slate");
+                border-radius: 4px;
+            }
+
+            .up-down {
+                width: $arrows__size--b;
+                height: $arrows__size--a;
+            }
+        }
+
+        // B & A buttons
+
+        $letter-button__size: 25px;
+
+        .b {
+            margin-left: auto;
+            align-self: flex-end;
+        }
+
+        .b,
+        .a {
+            width: $letter-button__size;
+            height: $letter-button__size;
+            background-color: style.color("slate");
+            border-radius: 100%;
+        }
+
+        .a {
+            margin-left: 10px;
+        }
+    }
+
+    // Buttons
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        // Select & start buttons
+
+        .select,
+        .start {
+            width: 16px;
+            height: 8px;
+            background-color: style.color("slate");
+            border-radius: 10px;
+        }
+
+        .start {
+            margin-left: 10px;
+        }
+    }
+
+    // Speaker
+
+    $speaker__size: 40px;
+
+    .speaker {
+        position: absolute;
+        right: 5px;
+        bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        width: $speaker__size;
+        height: $speaker__size;
+        transform: rotate(45deg);
+        border-radius: 100%;
+        overflow: hidden;
+
+        .line {
+            width: 4px;
+            height: 100%;
+            background-color: $shadow;
+        }
+    }
+}
+
+// Color picker
+
+$picker__item--size: 3rem;
+$picker__columns: 3;
+$picker__gap: 1rem;
+
+$picker__width: ($picker__item--size * $picker__columns) + ($picker__gap * ($picker__columns - 1));
+
+#picker {
+    display: grid;
+    grid-template-columns: repeat($picker__columns, $picker__item--size);
+    grid-template-rows: repeat(2, $picker__item--size);
+    gap: $picker__gap;
+    width: $picker__width;
+    margin-top: 2rem;
+
+    // Buttons
+
+    button {
+        width: $picker__item--size;
+        height: $picker__item--size;
+        border-radius: 100%;
+        border: 4px solid transparent;
+        @include animate.transition(border-color);
+
+        // Colors
+
+        @each $name in map.keys($colors) {
+            @include color($name);
+        }
+
+        // Selected
+
+        &[aria-pressed="true"] {
+            border-color: var(--color);
+        }
+    }
+}
