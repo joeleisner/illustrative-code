@@ -93,14 +93,9 @@ $box-shadow--sm: 0px 0.5rem 1rem 0px var(--box-shadow-color);
         }
 
         &:before {
-            @include style.icon(attr(data-icon));
             @include media.breakpoint {
                 margin-right: 0.5rem;
             }
-        }
-
-        &[data-family="brands"]:before {
-            font-family: "Font Awesome 5 Brands"
         }
 
         $link--active__background-color: style.color("white");

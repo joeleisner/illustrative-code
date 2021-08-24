@@ -126,6 +126,19 @@ button {
     }
 }
 
+// Icon links & buttons
+
+a[data-icon],
+button[data-icon] {
+    &:before {
+        @include style.icon(attr(data-icon));
+    }
+
+    &[data-family="brands"]:before {
+        font-family: "Font Awesome 5 Brands"
+    }
+}
+
 // Text
 
 h1 {
