@@ -1,0 +1,73 @@
+extends base
+
+include ../components/panel/index
+
+block settings
+    -
+        const nav = [
+            {
+                to: "/illustrative-code/",
+                title: "Back to the Illustrative Code homepage",
+                icon: "\uf053",
+                text: "Back"
+            },
+            {
+                type: "button",
+                to: "#demo",
+                title: "Project demo",
+                icon: "\uf04b",
+                text: "Demo",
+                active: true
+            },
+            {
+                type: "button",
+                to: "#description",
+                title: "Project description",
+                icon: "\uf039",
+                text: "Description"
+            },
+            {
+                to: "https://github.com/joeleisner/illustrative-code/tree/main/projects/" + date,
+                title: "Project source code on Github",
+                icon: "\uf121",
+                text: "Code"
+            },
+            {
+                type: "button",
+                id: "nav__toggle",
+                title: "Turn on dark mode",
+                icon: "\uf186",
+                text: "Dark mode"
+            }
+        ]
+        const navShadow = false;
+
+block head
+    //- Title
+    title #{ title }, an Illustrative Code example
+    //- Project styles
+    link(
+        rel="stylesheet"
+        href="project.css"
+    )
+
+block body
+    h1.sr-only=title
+    +panel({
+        id: "demo",
+        label: "Demo",
+        visible: true
+    })
+        block demo
+    +panel({
+        id: "description",
+        label: "Description",
+        contain: true
+    })
+        block description
+
+block scripts
+    if script
+        script(
+            src="project.js"
+        )

@@ -1,0 +1,22 @@
+extends ../../../../shared/project
+
+block vars
+    - var title = "Composition II in Red, Blue, and Yellow"
+    - var date = "2017/10/7"
+
+block description
+    include:markdown-it readme.md
+
+block demo
+    #composition
+        .row
+            .group
+                .rect-a.white
+                .rect-b.white
+            .rect-c.red
+        .row
+            .rect-d.blue
+            .rect-e.white
+            .group
+                .rect-f.white
+                .rect-g.yellow

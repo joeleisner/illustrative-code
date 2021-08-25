@@ -1,0 +1,13 @@
+extends ../../../../shared/project
+
+block vars
+    - var title = "Pint o' Beer"
+    - var date = "2017/10/21"
+
+block description
+    include:markdown-it readme.md
+
+block demo
+    #glass
+        .beer
+            .head

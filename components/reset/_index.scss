@@ -1,0 +1,151 @@
+// Reset styles
+
+@use "../../shared/animate";
+@use "../../shared/media";
+@use "../../shared/style";
+
+// Roboto
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+
+// FontAwesome
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+
+// Box sizing
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+// Root & body
+
+:root,
+body {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+// Body
+
+$body__background-color: style.color("white");
+$body__background-color--dark: style.color("slate");
+
+$body__color: style.color("slate");
+$body__color--dark: style.color("white");
+
+body {
+    --background-color: #{$body__background-color};
+    --color: #{$body__color};
+    display: flex;
+    flex-flow: column;
+    justify-content: stretch;
+    align-items: center;
+    line-height: 1.25;
+    background-color: var(--background-color);
+    line-height: 1.5;
+    color: var(--color);
+
+    @include media.theme("light") {
+        --background-color: #{$body__background-color};
+        --color: #{$body__color};
+    }
+
+    @include media.theme("dark") {
+        --background-color: #{$body__background-color--dark};
+        --color: #{$body__color--dark};
+    }
+}
+
+// Links
+
+$link__color: style.color("slate");
+$link__color--interact: style.color("black");
+$link__color--dark: style.color("white");
+$link__color--interact--dark: style.darken("white", 10%);
+
+a {
+    --color: #{$link__color};
+    --color--interact: #{$link__color--interact};
+    font-weight: bold;
+    color: var(--color);
+    @include animate.transition(color);
+
+    @include media.theme("light") {
+        --color: #{$link__color};
+        --color--interact: #{$link__color--interact};
+    }
+
+    @include media.theme("dark") {
+        --color: #{$link__color--dark};
+        --color--interact: #{$link__color--interact--dark};
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: var(--color--interact);
+    }
+}
+
+// Buttons
+
+$button__color: $link__color;
+$button__color--interact: $link__color--interact;
+$button__color--dark: $link__color--dark;
+$button__color--interact--dark: $link__color--interact--dark;
+
+button {
+    --color: #{$button__color};
+    --color--interact: #{$button__color--interact};
+    border: none;
+    background: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: var(--color);
+    @include animate.transition(color);
+
+    @include media.theme("light") {
+        --color: #{$button__color};
+        --color--interact: #{$button__color--interact};
+    }
+
+    @include media.theme("dark") {
+        --color: #{$button__color--dark};
+        --color--interact: #{$button__color--interact--dark};
+    }
+
+    &:hover,
+    &:focus {
+        color: var(--color--interact);
+    }
+}
+
+// Icon links & buttons
+
+a[data-icon],
+button[data-icon] {
+    &:before {
+        @include style.icon(attr(data-icon));
+    }
+
+    &[data-family="brands"]:before {
+        font-family: "Font Awesome 5 Brands"
+    }
+}
+
+// Text
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+h1, p {
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+// Panel styles
+
+@use "../../shared/media";
+@use "../../shared/style";
+
+.panel {
+    flex: 0;
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    &[aria-hidden="false"] {
+        flex: 1;
+        width: 100%;
+        height: auto;
+        visibility: visible;
+        padding: 2rem;
+    }
+
+    &__container {
+        @include style.container;
+    }
+}

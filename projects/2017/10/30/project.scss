@@ -1,0 +1,98 @@
+// Creative sprint trophy styles
+
+$gold: #FBC02D;
+
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-size: 10px;
+$font-weight: 900;
+
+#trophy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .top {
+        display: flex;
+        align-items: center;
+        z-index: 1;
+
+        .handle {
+            box-sizing: border-box;
+            width: 60px;
+            height: 60px;
+            border: 10px solid $gold;
+
+            &.left {
+                border-radius: 0px 0px 0px 100%;
+                margin-right: -30px;
+            }
+
+            &.right {
+                border-radius: 0px 0px 100% 0px;
+                margin-left: -30px;
+            }
+        }
+
+        .cup {
+            width: 120px;
+            height: 120px;
+            border-radius: 0px 0px 100% 100%;
+            background-color: $gold;
+        }
+    }
+
+    .stem {
+        position: relative;
+        width: 90px;
+        height: 61px;
+        margin-top: -1px;
+        background-color: $gold;
+
+        .cutout {
+            position: absolute;
+            top: -35px;
+            width: 90px;
+            height: 90px;
+            border-radius: 100%;
+            background-color: var(--background-color);
+
+            &.left {
+                left: -55px;
+            }
+
+            &.right {
+                right: -55px;
+            }
+        }
+    }
+
+    .bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .step {
+            display: flex;
+            justify-content: center;
+            height: 15px;
+            background-color: var(--color);
+            font-family: $font-family;
+            font-size: $font-size;
+            font-weight: $font-weight;
+            text-transform: uppercase;
+            color: var(--background-color);
+
+            &:first-child {
+                align-items: flex-end;
+                width: 120px;
+            }
+
+            &:last-child {
+                align-items: flex-start;
+                width: 140px;
+            }
+        }
+    }
+}

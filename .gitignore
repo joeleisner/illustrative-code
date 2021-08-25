@@ -1,3 +1,4 @@
 .DS_Store
-dist/
+.eslintcache
+build/
 node_modules/

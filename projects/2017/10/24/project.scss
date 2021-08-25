@@ -1,0 +1,85 @@
+// Sushi styles
+
+@use "../../../../shared/media";
+@use "../../../../shared/style";
+
+$avacado: #8BC34A;
+$salmon:  #FF5722;
+
+#sushi,
+#sushi * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#sushi,
+.rice,
+.seaweed,
+.filling {
+    border-radius: 100%;
+}
+
+$box-shadow-color: rgba(style.color("slate"), 0.5);
+$box-shadow-color--dark: rgba(style.color("black"), 0.5);
+
+#sushi {
+    --box-shadow-color: #{$box-shadow-color};
+    width: 180px;
+    height: 180px;
+    background-color: style.color("black");
+    box-shadow: 5px 5px 20px var(--box-shadow-color);
+
+    @include media.theme("light") {
+        --box-shadow-color: #{$box-shadow-color};
+    }
+
+    @include media.theme("dark") {
+        --box-shadow-color: #{$box-shadow-color--dark};
+    }
+
+    .rice {
+        width: 170px;
+        height: 170px;
+        background-color: style.color("white");
+
+        .seaweed {
+            width: 100px;
+            height: 100px;
+            background-color: style.color("black");
+
+            .filling {
+                width: 90px;
+                height: 90px;
+                background-color: style.darken("slate", 10%);
+                overflow: hidden;
+                transform: rotate(45deg);
+
+                .avacado {
+                    flex-direction: row;
+                    width: 90px;
+                    height: 45px;
+
+                    .piece {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 15px;
+                        background-color: $avacado;
+
+                        &:last-child {
+                            transform: rotate(-30deg);
+                        }
+                    }
+                }
+
+                .salmon {
+                    width: 90px;
+                    height: 45px;
+                    border-radius: 15px;
+                    background-color: $salmon;
+                }
+            }
+        }
+    }
+}

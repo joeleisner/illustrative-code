@@ -1,0 +1,30 @@
+// Shared media module
+
+@use "sass:map";
+
+// Breakpoints
+
+$breakpoints: (
+    "sm": 768px,
+    "md": 992px,
+    "lg": 1200px
+);
+
+@mixin breakpoint($breakpoint: "sm") {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+        @content;
+    }
+}
+
+
+// Themes
+
+@mixin theme($theme: "light") {
+    @media (prefers-color-scheme: #{ $theme }) {
+        @content;
+    }
+
+    :root[data-theme="#{ $theme }"] & {
+        @content;
+    }
+}

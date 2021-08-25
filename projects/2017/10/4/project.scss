@@ -1,0 +1,86 @@
+// Plastic bag styles
+
+@use "../../../../shared/media";
+@use "../../../../shared/style";
+
+// Colors
+
+$bag-color: style.darken("white", 10%);
+$bag-color--dark: style.color("white");
+$text-color: #C62828;
+$text-color--dark: #d32f2f;
+
+// Typography
+
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-size: 24px;
+$font-weight: 900;
+
+#bag {
+    --bag: #{$bag-color};
+    --text: #{$text-color};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 180px;
+    height: 270px;
+    background-color: var(--bag);
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    color: var(--text);
+
+    @include media.theme("light") {
+        --bag: #{$bag-color};
+        --text: #{$text-color};
+    }
+
+    @include media.theme("dark") {
+        --bag: #{$bag-color--dark};
+        --text: #{$text-color--dark};
+    }
+
+    .cutout {
+        width: 120px;
+        height: 60px;
+        border-radius: 0px 0px 15px 15px;
+        background-color: var(--background-color);
+    }
+
+    ul.text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+        list-style: none;
+
+        li {
+            text-align: center;
+            line-height: 0.8;
+
+            &.caps {
+                text-transform: uppercase;
+            }
+
+            &.outline {
+                -webkit-text-fill-color: var(--bag);
+                -webkit-text-stroke-width: 1px;
+                -webkit-text-stroke-color: var(--text);
+            }
+
+            &.tiny {
+                margin-top: 5px;
+                font-size: 0.5em;
+            }
+
+            &.right {
+                text-align: right;
+            }
+        }
+    }
+}

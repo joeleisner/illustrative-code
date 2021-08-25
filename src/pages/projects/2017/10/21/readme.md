@@ -1,3 +1,0 @@
-# Pint o' Beer
-
-This example was made for day 21 of the October 2017 Creative Sprint. The prompt was to ask someone to tell you a story about their day and make something inspired by it! Instead of asking a friend for a story, I based the prompt on what a friend and I did that day. We went to an event where we got to drink beer, eat pickles, and pet some dogs 👌 (also, since the prompt is 21, I figured to make it a little bit of a pun).

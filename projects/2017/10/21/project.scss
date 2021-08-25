@@ -1,0 +1,43 @@
+// Pint o' Beer styles
+
+@use "../../../../shared/media";
+@use "../../../../shared/style";
+
+$amber: #FFC107;
+
+$background-color: rgba(style.color("slate"), 0.25);
+$background-color--dark: rgba(style.color("white"), 0.25);
+
+#glass {
+    --background-color: #{$background-color};
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    width: 180px;
+    height: 280px;
+    padding: 10px;
+    background-color: var(--background-color);
+    transform: perspective(20px) rotateX(-1deg);
+
+    @include media.theme("light") {
+        --background-color: #{$background-color};
+    }
+
+    @include media.theme("dark") {
+        --background-color: #{$background-color--dark};
+    }
+
+    .beer {
+        width: 160px;
+        height: 240px;
+        background-color: $amber;
+        transform: perspective(20px) rotateX(-0.05deg);
+
+        .head {
+            width: 160px;
+            height: 40px;
+            background-color: style.color("white");
+        }
+    }
+}

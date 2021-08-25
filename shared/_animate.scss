@@ -1,0 +1,27 @@
+// Shared animation module
+
+@use "sass:list";
+
+// Transitions
+
+$transition__duration: 0.2s;
+$transition__timing-function: ease-in-out;
+$transition: $transition__duration $transition__timing-function;
+
+@function transition--rule($property) {
+    @return $property $transition;
+}
+
+@mixin transition($properties...) {
+    $transitions: null;
+
+    @each $property in $properties {
+        $transitions: list.append(
+            $transitions,
+            transition--rule($property),
+            comma
+        );
+    }
+
+    transition: $transitions;
+}

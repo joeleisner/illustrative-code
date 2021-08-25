@@ -1,0 +1,44 @@
+block vars
+block settings
+
+include ../components/nav/index
+include ../components/wrapper/index
+
+doctype html
+html(
+    lang="en"
+    data-theme=theme
+)
+    head
+        //- Meta
+        meta(charset="utf-8")
+        meta(
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        )
+        //- Page head
+        block head
+        //- Favicon
+        link(
+            rel="icon" 
+            type="image/png" 
+            href="/illustrative-code/images/favicon.png"
+        )
+        //- CSS
+        link(
+            rel="stylesheet"
+            href="/illustrative-code/site.css"
+        )
+    body
+        //- Navigation
+        +nav(nav, navShadow)
+        //- Page body
+        +wrapper
+            main
+                block body
+            block footer
+        //- Page scripts
+        script(
+            src="/illustrative-code/site.js"
+        )
+        block scripts
