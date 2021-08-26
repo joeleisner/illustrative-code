@@ -6,14 +6,14 @@ block settings
     -
         const nav = [
             {
-                to: "/illustrative-code/",
+                to: config.root,
                 title: "Back to the Illustrative Code homepage",
                 icon: "\uf053",
                 text: "Back"
             },
             {
                 type: "button",
-                to: "#demo",
+                to: "demo",
                 title: "Project demo",
                 icon: "\uf04b",
                 text: "Demo",
@@ -21,7 +21,7 @@ block settings
             },
             {
                 type: "button",
-                to: "#description",
+                to: "description",
                 title: "Project description",
                 icon: "\uf039",
                 text: "Description"
@@ -43,12 +43,40 @@ block settings
         const navShadow = false;
 
 block head
+    - const projectTitle = title + ', an Illustrative Code example'
+    - const projectDescription = description || config.description
+    - const projectThumbnail = `${ config.url }images/${ date.split('/').join('-') }.jpg`
     //- Title
-    title #{ title }, an Illustrative Code example
+    title=projectTitle
+    meta(
+        name="og:title"
+        content=projectTitle
+    )
+    meta(
+        name="twitter:title"
+        content=projectTitle
+    )
+    meta(
+        name="description"
+        content=projectDescription
+    )
+    meta(
+        name="og:description"
+        content=projectDescription
+    )
+    meta(
+        name="twitter:description"
+        content=projectDescription
+    )
+    meta(
+        name="og:image"
+        content=projectThumbnail
+    )
     //- Project styles
     link(
         rel="stylesheet"
         href="project.css"
+        media="screen"
     )
 
 block body
@@ -70,4 +98,5 @@ block scripts
     if script
         script(
             src="project.js"
+            defer
         )

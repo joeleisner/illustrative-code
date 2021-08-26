@@ -6,7 +6,7 @@ block settings
     -
         const nav = [
             {
-                to: "/",
+                to: "http://joeleisner.com",
                 title: "Joel Eisner's homepage",
                 icon: "\uf015",
                 text: "Home"
@@ -42,7 +42,31 @@ block settings
 
 block head
     //- Title
-    title Illustrative Code
+    title=config.title
+    meta(
+        name="og:title"
+        content=config.title
+    )
+    meta(
+        name="twitter:title"
+        content=config.title
+    )
+    meta(
+        name="description"
+        content=config.description
+    )
+    meta(
+        name="og:description"
+        content=config.description
+    )
+    meta(
+        name="twitter:description"
+        content=config.description
+    )
+    meta(
+        name="og:image",
+        content=config.url + "images/thumbnail.png"
+    )
 
 block body
     block content
