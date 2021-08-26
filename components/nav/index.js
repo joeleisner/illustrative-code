@@ -7,7 +7,7 @@ export class Nav {
 
     // Gets the ID of the panel a nav control targets
     controls(control) {
-        return control.getAttribute('aria-controls').substring(1);
+        return control.getAttribute('aria-controls');
     }
 
     // Store all nav references

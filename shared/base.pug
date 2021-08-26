@@ -13,21 +13,54 @@ html(
         //- Meta
         meta(charset="utf-8")
         meta(
+            http-equiv="x-ua-compatible"
+            content="ie=edge"
+        )
+        meta(
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         )
+        meta(
+            name="og:type"
+            content="website"
+        )
+        meta(
+            name="twitter:card"
+            content="summary"
+        )
+        meta(
+            name="twitter:creator"
+            content=config.author.twitter
+        )
         //- Page head
         block head
-        //- Favicon
+        //- Base favicon
         link(
-            rel="icon" 
-            type="image/png" 
-            href="/illustrative-code/images/favicon.png"
+            rel="icon"
+            href=config.root + config.icons.variants[0].name
         )
+        //- Manifest
+        link(
+            rel="manifest"
+            href=config.root + "manifest.webmanifest"
+            crossorigin="anonymous"
+        )
+        //- Theme color
+        meta(
+            name="theme-color",
+            content=config.color
+        )
+        for icon in config.manifest.icons
+            link(
+                rel="apple-touch-icon"
+                size=icon.sizes
+                href=config.root + icon.src
+            )
         //- CSS
         link(
             rel="stylesheet"
-            href="/illustrative-code/site.css"
+            href=config.root + "site.css"
+            media="screen"
         )
     body
         //- Navigation
@@ -39,6 +72,7 @@ html(
             block footer
         //- Page scripts
         script(
-            src="/illustrative-code/site.js"
+            src=config.root + "site.js"
+            defer
         )
         block scripts

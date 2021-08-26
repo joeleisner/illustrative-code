@@ -1,8 +1,8 @@
 //- Card structure
 mixin card(path, title)
-    - var image = "/illustrative-code/images/" + path.split("/").join("-")
+    - const image = config.root + "images/" + path.split("/").join("-")
     a.card(
-        href="/illustrative-code/projects/" + path
+        href=config.root + "projects/" + path
     )
         .card__wrap.card__wrap--loading
             img(
