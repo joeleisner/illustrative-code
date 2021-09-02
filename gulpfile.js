@@ -32,7 +32,8 @@ export async function optimizeImages() {
 
     return gulp.src([
         'images/**/*',
-        '!images/icon.png'
+        '!images/icon.png',
+        '!images/icon.svg'
     ])
         .pipe(imagemin({ verbose }))
         .pipe(gulp.dest(build_dir + '/images'))
@@ -178,10 +179,19 @@ export async function serve() {
     });
 }
 
-// Generate the site icons
+// Generat the favicon
+export async function favicons() {
+    const { icons } = await import('./config.js');
+    const { favicon, dest } = icons;
+
+    return gulp.src(favicon.src)
+        .pipe(gulp.dest(dest));
+}
+
+// Generate the web app icons
 export async function icons(done) {
     const verbose = inDevelopment;
-    const { build_dir, icons } = await import('./config.js');
+    const { icons } = await import('./config.js');
     const {
         src,
         variants,
@@ -196,7 +206,7 @@ export async function icons(done) {
             }))
             .pipe(imagemin({ verbose }))
             .pipe(rename(name))
-            .pipe(gulp.dest(size === 32 ? build_dir : dest));
+            .pipe(gulp.dest(dest));
     });
 
     return done();
@@ -204,10 +214,14 @@ export async function icons(done) {
 
 // Generate the site manifest
 export async function manifest(done) {
-    const { manifest } = await import('./config.js');
+    const { build_dir, manifest } = await import('./config.js');
+
+    const dir = path.join(process.cwd(), build_dir);
+
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
     fs.writeFileSync(
-        path.join(process.cwd(), 'build/manifest.webmanifest'),
+        path.join(dir, 'manifest.webmanifest'),
         JSON.stringify(manifest)
     );
 
@@ -218,7 +232,8 @@ export async function manifest(done) {
 export function watch() {
     gulp.watch([
         'images/**/*',
-        '!images/icon.png'
+        '!images/icon.png',
+        '!images/icon.svg'
     ], img);
     gulp.watch([
         'service-worker.js',
@@ -238,13 +253,17 @@ export function watch() {
     gulp.watch('{projects,shared}/**/*.scss', projectSass);
     gulp.watch([
         'config.js',
+        'images/icon.svg'
+    ], favicons);
+    gulp.watch([
+        'config.js',
         'images/icon.png'
     ], icons);
     gulp.watch('config.js', manifest);
 }
 
 // Build all assets
-export const build = gulp.series(gulp.parallel(img, js, pug, sass), icons, manifest);
+export const build = gulp.series(gulp.parallel(img, js, pug, sass), favicons, icons, manifest);
 
 // Build all assets, serve the "build" directory, and watch for changes
 export const develop = gulp.series(build, gulp.parallel(serve, watch));

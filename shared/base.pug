@@ -36,8 +36,14 @@ html(
         block head
         //- Base favicon
         link(
+            rel="icon",
+            href=config.root + config.manifest.icons[0].src
+            sizes="any"
+        )
+        link(
             rel="icon"
-            href=config.root + config.icons.variants[0].name
+            href=config.root + config.icons.favicon.path,
+            type="image/svg+xml"
         )
         //- Manifest
         link(
