@@ -21,6 +21,10 @@ export const icon_type = 'png';
 export const icons = {
     src: 'images/icon.png',
     type: icon_type,
+    favicon: {
+        src: 'images/icon.svg',
+        path: 'icons/icon.svg'
+    },
     variants: [
         32,
         48,
@@ -31,8 +35,8 @@ export const icons = {
         256,
         384,
         512
-    ].map((size, index) => {
-        const dir = index ? 'icons/' : undefined;
+    ].map(size => {
+        const dir = 'icons/';
         const name = `icon-${ size }.${ icon_type }`;
         return {
             dir,
@@ -46,22 +50,24 @@ export const icons = {
 // The web manifest information
 export const manifest = {
     name: title,
-    short_name: 'IC',
+    short_name: title,
     description: description,
     start_url: root,
     background_color: color,
     theme_color: color,
-    display: 'minimal-ui',
+    display: 'standalone',
     lang: 'en-US',
     orientation: 'portrait',
-    icons: icons.variants.slice(1).map(({ dir, name, size }) => {
+    icons: icons.variants.map(({ dir, name, size }) => {
         const src = dir + name;
         const sizes = `${ size }x${ size }`;
         const type = 'image/' + icon_type;
+        const purpose = 'any maskable';
         return {
             src,
             sizes,
-            type
+            type,
+            purpose
         };
     })
 };
