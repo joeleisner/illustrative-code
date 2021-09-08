@@ -2,7 +2,7 @@
 mixin card(path, title)
     - const image = config.root + "images/" + path.split("/").join("-")
     a.card(
-        href=config.root + "projects/" + path
+        href=`${ config.root }projects/${ path }/`
     )
         .card__wrap.card__wrap--loading
             img(
