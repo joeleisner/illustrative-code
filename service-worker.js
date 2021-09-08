@@ -1,39 +1,52 @@
 // Names of caches
-const PRECACHE = 'illustrative-code-2.1.0';
-const RUNTIME = 'runtime';
+const NAME = 'ic';
+const VERSION = '2.1.2';
+const CACHES = {
+    PRE: NAME + '-precache-' + VERSION,
+    RUN: NAME + '-runtime-' + VERSION
+};
+
+// Map of offline assets
+const OFFLINE_ASSETS = {
+    css: 'offline/offline.css',
+    html: 'offline/index.html',
+    js: 'offline/offline.js'
+};
 
 // List of assets always to be cached
 const PRECACHE_URLS = [
     'index.html',
+    ...Object.values(OFFLINE_ASSETS),
     'site.css',
     'site.js'
 ];
 
 // Install handler (precache assets)
 self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(PRECACHE)
-            .then(cache => cache.addAll(PRECACHE_URLS))
-            .then(self.skipWaiting())
-    );
+    event.waitUntil((async () => {
+        const cache = await caches.open(CACHES.PRE);
+
+        await cache.addAll(PRECACHE_URLS);
+    })());
+
+    self.skipWaiting();
 });
 
-// Active handler (clean up old cached)
-self.addEventListener('active', event => {
-    const currentCaches = [
-        PRECACHE,
-        RUNTIME
-    ];
+// Activate handler (clean up old cached)
+self.addEventListener('activate', event => {
+    const currentCaches = Object.values(CACHES);
 
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
-        }).then(cachesToDelete => {
-            return Promise.all(cachesToDelete.map(cacheToDelete => {
-                return caches.delete(cacheToDelete);
-            }));
-        }).then(() => self.clients.claim())
-    );
+    event.waitUntil((async () => {
+        const cacheNames = await caches.keys();
+
+        const cachesToDelete = cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+
+        await Promise.all(cachesToDelete.map(cacheToDelete => {
+            return caches.delete(cacheToDelete);
+        }));
+    })());
+
+    self.clients.claim();
 });
 
 // Fetch handler (use cache for local assets if possible)
@@ -41,17 +54,30 @@ self.addEventListener('fetch', event => {
     // Ignore cross-origin requests
     if (!event.request.url.startsWith(self.location.origin)) return;
 
-    event.respondWith(
-        caches.match(event.request).then(cachedResponse => {
+    // Ignore BrowserSync requests
+    if (event.request.url.includes('browser-sync')) return;
+
+    event.respondWith((async () => {
+        try {
+            const cachedResponse = await caches.match(event.request);
+
             if (cachedResponse) return cachedResponse;
 
-            return caches.open(RUNTIME).then(cache => {
-                return fetch(event.request).then(response => {
-                    return cache.put(event.request, response.clone()).then(() => {
-                        return response;
-                    });
-                });
-            });
-        })
-    );
+            const cache = await caches.open(CACHES.RUN);
+
+            const response = await fetch(event.request);
+
+            await cache.put(event.request, response.clone());
+
+            return response;
+        } catch (error) {
+            if (event.request.mode === 'navigate') {
+                console.error('Fetch failed; returning offline page instead.', error);
+
+                const cache = await caches.open(CACHES.PRE);
+                const offlinePath = await cache.match(OFFLINE_ASSETS.html);
+                return offlinePath;
+            }
+        }
+    })());
 });

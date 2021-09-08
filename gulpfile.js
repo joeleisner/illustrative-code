@@ -84,6 +84,14 @@ export function siteJs() {
     });
 }
 
+// Transpile the offline page JS
+export function offlineJs() {
+    return jsTask({
+        src: 'offline/offline.js',
+        dest: 'offline'
+    });
+}
+
 // Transpile project JS
 export function projectJs() {
     return jsTask({
@@ -93,7 +101,7 @@ export function projectJs() {
 }
 
 // Transpile JS
-const js = gulp.parallel(siteJs, projectJs);
+const js = gulp.parallel(siteJs, offlineJs, projectJs);
 
 // Define a generic PUG to HTML task
 async function pugTask({ src, dest }) {
@@ -116,6 +124,14 @@ export function homePug() {
     });
 }
 
+// Transpile the offline page
+export function offlinePug() {
+    return pugTask({
+        src: 'offline/index.pug',
+        dest: 'offline'
+    });
+}
+
 // Transpile the project pages
 export function projectPug() {
     return pugTask({
@@ -125,7 +141,7 @@ export function projectPug() {
 }
 
 // Turn PUG into HTML
-export const pug = gulp.parallel(homePug, projectPug);
+export const pug = gulp.parallel(homePug, offlinePug, projectPug);
 
 // Define a generic SASS to CSS task
 async function sassTask({ src, dest }) {
@@ -149,6 +165,14 @@ export function siteSass() {
     });
 }
 
+// Turn the offline SASS into CSS
+export function offlineSass() {
+    return sassTask({
+        src: 'offline/offline.scss',
+        dest: 'offline'
+    });
+}
+
 // Turn project SASS into CSS
 export function projectSass() {
     return sassTask({
@@ -158,7 +182,7 @@ export function projectSass() {
 }
 
 // Turn SASS into CSS
-export const sass = gulp.parallel(siteSass, projectSass);
+export const sass = gulp.parallel(siteSass, offlineSass, projectSass);
 
 // Serve the "build" directory on localhost
 export async function serve() {
@@ -230,35 +254,45 @@ export async function manifest(done) {
 
 // Watch for source file changes
 export function watch() {
+    // Images
     gulp.watch([
         'images/**/*',
         '!images/icon.png',
         '!images/icon.svg'
     ], img);
+    // JS
     gulp.watch([
         'service-worker.js',
         'site.js',
         '{components,shared}/**/*.js'
     ], siteJs);
+    gulp.watch('offline/index.js', offlineJs);
     gulp.watch('{projects,shared}/**/*.js', projectJs);
+    // Pug
     gulp.watch([
         'config.js',
         'index.pug',
         '{components,projects,shared}/**/*.{md,pug}'
     ], pug);
+    gulp.watch('offline/index.pug', offlinePug);
+    // SCSS
     gulp.watch([
         'site.scss',
         '{components,shared}/**/*.scss'
     ], siteSass);
+    gulp.watch('offline/index.scss', offlineSass);
     gulp.watch('{projects,shared}/**/*.scss', projectSass);
+    // Favicons
     gulp.watch([
         'config.js',
         'images/icon.svg'
     ], favicons);
+    // Icons
     gulp.watch([
         'config.js',
         'images/icon.png'
     ], icons);
+    // Manifest
     gulp.watch('config.js', manifest);
 }
 
