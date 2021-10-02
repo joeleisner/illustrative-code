@@ -4,8 +4,10 @@ import cssnano from 'cssnano';
 import fiber from 'fibers';
 import fs from 'fs';
 import gulp from 'gulp';
-import gulpPug from 'gulp-pug';
 import gulpSass from 'gulp-sass';
+import htmlmin from 'gulp-htmlmin';
+import htmlprettify from 'gulp-html-prettify';
+import { jsToHTML } from './shared/plugins.cjs';
 import imagemin from 'gulp-imagemin';
 import imageResize from 'gulp-image-resize';
 import named from 'vinyl-named-with-path';
@@ -14,7 +16,10 @@ import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import sassCompiler from 'sass';
 import webpack from 'webpack';
-import webpackConfig from './webpack.config.js';
+import {
+    html as htmlConfig,
+    js as jsConfig
+} from './webpack.config.js';
 import webpackStream from 'webpack-stream';
 
 const transpiler = gulpSass(sassCompiler);
@@ -65,7 +70,7 @@ async function jsTask({ src, dest }) {
     const { build_dir } = await import('./config.js');
 
     const mode = MODE;
-    const options = Object.assign({ mode }, webpackConfig);
+    const options = Object.assign({ mode }, jsConfig);
 
     return gulp.src(src)
         .pipe(named())
@@ -103,45 +108,26 @@ export function projectJs() {
 // Transpile JS
 const js = gulp.parallel(siteJs, offlineJs, projectJs);
 
-// Define a generic PUG to HTML task
-async function pugTask({ src, dest }) {
-    const pretty = inDevelopment;
+// Define the HTML source file globs
+const HTML_FILES = [
+    '{offline,projects}/**/index.js',
+    'index.js'
+];
 
-    const config = await import('./config.js');
+// Transpile JS to HTML
+export async function html() {
+    const { build_dir } = await import('./config.js');
 
-    const data = { config };
-
-    return gulp.src(src)
-        .pipe(gulpPug({ data, pretty }))
-        .pipe(gulp.dest(dest ? config.build_dir + '/' + dest : config.build_dir))
-        .pipe(browserSync.stream());
+    return gulp.src(HTML_FILES)
+        .pipe(named())
+        .pipe(webpackStream(htmlConfig, webpack))
+        .pipe(jsToHTML())
+        .pipe(inProduction ? htmlmin({
+            collapseWhitespace: true,
+            removeComments: true
+        }) : htmlprettify())
+        .pipe(gulp.dest(build_dir));
 }
-
-// Transpile the homepage
-export function homePug() {
-    return pugTask({
-        src: 'index.pug'
-    });
-}
-
-// Transpile the offline page
-export function offlinePug() {
-    return pugTask({
-        src: 'offline/index.pug',
-        dest: 'offline'
-    });
-}
-
-// Transpile the project pages
-export function projectPug() {
-    return pugTask({
-        src: 'projects/**/index.pug',
-        dest: 'projects'
-    });
-}
-
-// Turn PUG into HTML
-export const pug = gulp.parallel(homePug, offlinePug, projectPug);
 
 // Define a generic SASS to CSS task
 async function sassTask({ src, dest }) {
@@ -268,13 +254,13 @@ export function watch() {
     ], siteJs);
     gulp.watch('offline/index.js', offlineJs);
     gulp.watch('{projects,shared}/**/*.js', projectJs);
-    // Pug
+    // HTML
     gulp.watch([
+        'components/**/html.js',
         'config.js',
-        'index.pug',
-        '{components,projects,shared}/**/*.{md,pug}'
-    ], pug);
-    gulp.watch('offline/index.pug', offlinePug);
+        'shared/html.js',
+        ...HTML_FILES
+    ], html);
     // SCSS
     gulp.watch([
         'site.scss',
@@ -297,7 +283,7 @@ export function watch() {
 }
 
 // Build all assets
-export const build = gulp.series(gulp.parallel(img, js, pug, sass), favicons, icons, manifest);
+export const build = gulp.series(gulp.parallel(img, js, html, sass), favicons, icons, manifest);
 
 // Build all assets, serve the "build" directory, and watch for changes
 export const develop = gulp.series(build, gulp.parallel(serve, watch));
