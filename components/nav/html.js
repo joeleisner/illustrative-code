@@ -32,7 +32,6 @@ export function Link(instructions) {
         to,
         title,
         icon,
-        // family,
         text,
         active = false
     } = instructions;
@@ -41,33 +40,30 @@ export function Link(instructions) {
 
     if (active) classes.push('nav__link--active');
 
-    if (type === 'link') {
-        const external = to.includes('http');
-        const rel = external ? 'noopener noreferrer' : false;
-        const target = external ? '_blank' : false;
-
-        return LinkAnchor({
-            id,
-            href: to,
-            class: classes.join(' '),
-            title,
-            'aria-label': title,
-            rel,
-            target,
-            icon,
-            text
-        });
-    }
-
-    if (type === 'button') return LinkButton({
+    const attributes = {
         id,
         class: classes.join(' '),
-        'aria-controls': to,
         title,
         'aria-label': title,
         icon,
         text
-    });
+    };
+
+    if (type === 'link') {
+        const external = to.includes('http');
+        const rel = external ? 'noopener noreferrer' : null;
+        const target = external ? '_blank' : null;
+
+        return LinkAnchor(Object.assign({
+            href: to,
+            rel,
+            target
+        }, attributes));
+    }
+
+    if (type === 'button') return LinkButton(Object.assign({
+        'aria-controls': to
+    }, attributes));
 }
 
 // Render the nav component
