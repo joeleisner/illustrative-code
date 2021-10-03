@@ -1,10 +1,10 @@
-import { html } from '../../shared/html.js';
+import { html, Icon } from '../../shared/html.js';
 
 // Render a nav anchor link
 export function LinkAnchor({ icon, text, ...attributes }) {
     return html`
         <a ${ attributes }>
-            ${ icon }
+            ${ Icon({ icon }) }
             <span class="nav__text">
                 ${ text }
             </span>
@@ -16,7 +16,7 @@ export function LinkAnchor({ icon, text, ...attributes }) {
 export function LinkButton({ icon, text, ...attributes }) {
     return html`
         <button ${ attributes }>
-            ${ icon }
+            ${ Icon({ icon }) }
             <span class="nav__text">
                 ${ text }
             </span>

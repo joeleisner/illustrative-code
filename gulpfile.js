@@ -198,7 +198,7 @@ export function watch() {
     ], js);
     // HTML
     gulp.watch([
-        'components/**/{_index.scss,html.js}',
+        'components/**/{_index.scss,html.js,*.md,*.svg}',
         'config.js',
         'shared/html.js',
         'site.scss',

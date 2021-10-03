@@ -139,8 +139,8 @@ $box-shadow--sm: 0px 0.5rem 1rem 0px var(--box-shadow-color);
     }
 
     &__toggle {
-        &--light svg:nth-child(2),
-        &--dark svg:nth-child(1) {
+        &--light .icon:nth-child(2),
+        &--dark .icon:nth-child(1) {
             display: none;
         }
     }

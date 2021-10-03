@@ -102,25 +102,28 @@ export function Style(style) {
     return Link(style);
 }
 
-// Generates a Font Awesome icon tag with the given attributes
-export function Icon({ style = 'solid', icon, text, ...attributes }) {
-    const styles = {
-        brand: 'fab',
-        solid: 'fas'
+// Provides useful functionality to SVG icons
+export function Icon({ icon, text, ...attributes }) {
+    const defaults = {
+        'aria-hidden': true,
+        'focusable': false,
+        class: 'icon',
+        role: 'presentation'
     };
 
-    const classes = [
-        styles[style],
-        `fa-${ icon }`,
-        attributes.class
-    ].filter(Boolean).join(' ');
+    attributes = Object.assign(defaults, attributes);
 
-    delete attributes.class;
+    if (typeof icon === 'string') icon = [icon];
+
+    icon = icon.map(svg => {
+        return svg
+            .replace(/xmlns/g, html`${ attributes } xmlns`)
+            .replace(/<!--(.*?)-->/g, '');
+    });
 
     return html`
-        <i class="${ classes }" ${ attributes }>
-            ${ text ? html`<span class="sr-only">${ text }</span>` : '' }
-        </i>
+        ${ icon }
+        ${ text ? html`<span class="sr-only">${ text }</span>` : '' }
     `;
 }
 
