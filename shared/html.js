@@ -339,7 +339,27 @@ export function Base({
     });
 }
 
-// Render the footer component
+// Homepage icons
+import homeIcon from '@fortawesome/fontawesome-free/svgs/solid/home.svg';
+import twitterIcon from '@fortawesome/fontawesome-free/svgs/brands/twitter.svg';
+import instagramIcon from '@fortawesome/fontawesome-free/svgs/brands/instagram.svg';
+import codeBranchIcon from '@fortawesome/fontawesome-free/svgs/solid/code-branch.svg';
+import moonIcon from '@fortawesome/fontawesome-free/svgs/solid/moon.svg';
+import sunIcon from '@fortawesome/fontawesome-free/svgs/solid/sun.svg';
+
+// Theme toggle icons
+export const themeToggleIcons = [ moonIcon, sunIcon ];
+
+// Theme toggle
+export const themeToggle = {
+    type: 'button',
+    id: 'nav__toggle',
+    title: 'Turn on dark mode',
+    icon: themeToggleIcons,
+    text: 'Dark mode'
+};
+
+// Footer component
 import { Footer } from '../components/footer/html.js';
 
 // Bootstraps the site's home layout
@@ -359,36 +379,28 @@ export function Home({
         {
             to: 'http://joeleisner.com',
             title: 'Joel Eisner\'s homepage',
-            icon: '\uf015',
+            icon: homeIcon,
             text: 'Home'
         },
         {
             to: 'https://twitter.com/joeleisner',
             title: 'Joel Eisner\'s Twitter',
-            icon: '\uf099',
-            family: 'brands',
+            icon: twitterIcon,
             text: 'Twitter'
         },
         {
             to: 'https://instagram.com/joeleisner',
             title: 'Joel Eisner\'s Instagram',
-            icon: '\uf16d',
-            family: 'brands',
+            icon: instagramIcon,
             text: 'Instagram'
         },
         {
             to: 'https://github.com/joeleisner/illustrative-code/',
             title: 'Illustrative Code Github repo page',
-            icon: '\uf126',
+            icon: codeBranchIcon,
             text: 'GitHub'
         },
-        {
-            type: 'button',
-            id: 'nav__toggle',
-            title: 'Turn on dark mode',
-            icon: '\uf186',
-            text: 'Dark mode'
-        }
+        themeToggle
     ];
     // ... and footer
     const footer = Footer();
@@ -404,6 +416,13 @@ export function Home({
     });
 }
 
+// Project page icons
+import chevronLeftIcon from '@fortawesome/fontawesome-free/svgs/solid/chevron-left.svg';
+import playIcon from '@fortawesome/fontawesome-free/svgs/solid/play.svg';
+import alignJustifyIcon from '@fortawesome/fontawesome-free/svgs/solid/align-justify.svg';
+import codeIcon from '@fortawesome/fontawesome-free/svgs/solid/code.svg';
+
+// Panel component
 import { Panel } from '../components/panel/html.js';
 
 // Bootstraps the site's project layout
@@ -432,14 +451,14 @@ export function Project({
         {
             to: config.root,
             title: 'Back to the Illustrative Code homepage',
-            icon: '\uf053',
+            icon: chevronLeftIcon,
             text: 'Back'
         },
         {
             type: 'button',
             to: 'demo',
             title: 'Project demo',
-            icon: '\uf04b',
+            icon: playIcon,
             text: 'Demo',
             active: true
         },
@@ -447,22 +466,16 @@ export function Project({
             type: 'button',
             to: 'description',
             title: 'Project description',
-            icon: '\uf039',
+            icon: alignJustifyIcon,
             text: 'Description'
         },
         {
             to: 'https://github.com/joeleisner/illustrative-code/tree/main/projects/' + date,
             title: 'Project source code on Github',
-            icon: '\uf121',
+            icon: codeIcon,
             text: 'Code'
         },
-        {
-            type: 'button',
-            id: 'nav__toggle',
-            title: 'Turn on dark mode',
-            icon: '\uf186',
-            text: 'Dark mode'
-        }
+        themeToggle
     ];
 
     const navShadow = false;

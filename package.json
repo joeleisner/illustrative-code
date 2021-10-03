@@ -66,6 +66,7 @@
     "not OperaMini all"
   ],
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "js-cookie": "^3.0.0"
   }
 }

@@ -1,9 +1,10 @@
 import { html } from '../../shared/html.js';
 
 // Render a nav anchor link
-export function LinkAnchor({ text, ...attributes }) {
+export function LinkAnchor({ icon, text, ...attributes }) {
     return html`
         <a ${ attributes }>
+            ${ icon }
             <span class="nav__text">
                 ${ text }
             </span>
@@ -12,9 +13,10 @@ export function LinkAnchor({ text, ...attributes }) {
 }
 
 // Render a nav button link
-export function LinkButton({ text, ...attributes }) {
+export function LinkButton({ icon, text, ...attributes }) {
     return html`
         <button ${ attributes }>
+            ${ icon }
             <span class="nav__text">
                 ${ text }
             </span>
@@ -30,7 +32,7 @@ export function Link(instructions) {
         to,
         title,
         icon,
-        family,
+        // family,
         text,
         active = false
     } = instructions;
@@ -52,8 +54,7 @@ export function Link(instructions) {
             'aria-label': title,
             rel,
             target,
-            'data-icon': icon,
-            'data-family': family,
+            icon,
             text
         });
     }
@@ -64,8 +65,7 @@ export function Link(instructions) {
         'aria-controls': to,
         title,
         'aria-label': title,
-        'data-icon': icon,
-        'data-family': family,
+        icon,
         text
     });
 }

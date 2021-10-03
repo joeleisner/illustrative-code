@@ -1,5 +1,7 @@
 import { root } from '../config.js';
-import { html, Icon, Base } from '../shared/html.js';
+import chevronLeftIcon from '@fortawesome/fontawesome-free/svgs/solid/chevron-left.svg';
+import { themeToggle, html, Icon, Base } from '../shared/html.js';
+import heartBrokenIcon from '@fortawesome/fontawesome-free/svgs/solid/heart-broken.svg';
 import { Panel } from '../components/panel/html.js';
 
 const title = 'Illustrative Code is offline';
@@ -10,26 +12,16 @@ const nav = [
     {
         to: root,
         title: 'Back to the Illustrative Code homepage',
-        icon: '\uf053',
+        icon: chevronLeftIcon,
         text: 'Back'
     },
-    {
-        type: 'button',
-        id: 'nav__toggle',
-        title: 'Turn on dark mode',
-        icon: '\uf186',
-        text: 'Dark mode'
-    }
+    themeToggle
 ];
 
 const navShadow = false;
 
 const message = html`
-    ${ Icon({
-        icon: 'heart-broken',
-        class: 'fa-10x',
-        'aria-hidden': true
-    }) }
+    ${ heartBrokenIcon }
     <h1>No internet connection</h1>
     <p>This page isn't available offline.</p>
 `;

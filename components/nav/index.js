@@ -76,7 +76,8 @@ export class Nav {
         // ... aria-label,...
         this.references.toggle.setAttribute('aria-label', title);
         // ... icon,...
-        this.references.toggle.dataset.icon = this.theme.user === 'light' ? '\uf186' : '\uf185';
+        this.references.toggle.classList.toggle('nav__toggle--light', this.theme.user === 'light');
+        this.references.toggle.classList.toggle('nav__toggle--dark', this.theme.user === 'dark');
         // ... and text that is opposite of the current user theme
         this.references.toggle.querySelector('.nav__text').textContent = `${ this.theme.user === 'light' ? 'Dark' : 'Light' } mode`;
     }
