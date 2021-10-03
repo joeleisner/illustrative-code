@@ -1,6 +1,6 @@
 // Names of caches
 const NAME = 'ic';
-const VERSION = '2.1.2';
+const VERSION = '2.2.0';
 const CACHES = {
     PRE: NAME + '-precache-' + VERSION,
     RUN: NAME + '-runtime-' + VERSION
@@ -9,8 +9,7 @@ const CACHES = {
 // Map of offline assets
 const OFFLINE_ASSETS = {
     css: 'offline/offline.css',
-    html: 'offline/index.html',
-    js: 'offline/offline.js'
+    html: 'offline/index.html'
 };
 
 // List of assets always to be cached
