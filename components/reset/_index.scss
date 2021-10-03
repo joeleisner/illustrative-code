@@ -4,14 +4,6 @@
 @use "../../shared/media";
 @use "../../shared/style";
 
-// Roboto
-
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
-
-// FontAwesome
-
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
-
 // Box sizing
 
 *,
@@ -126,17 +118,15 @@ button {
     }
 }
 
-// Icon links & buttons
+// Icons
 
-a[data-icon],
-button[data-icon] {
-    &:before {
-        @include style.icon(attr(data-icon));
-    }
-
-    &[data-family="brands"]:before {
-        font-family: "Font Awesome 5 Brands"
-    }
+.icon {
+    display: inline-block;
+    font-size: inherit;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: var(--color);
 }
 
 // Text
@@ -148,4 +138,18 @@ h1 {
 
 h1, p {
     text-align: center;
+}
+
+// Screen reader
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }

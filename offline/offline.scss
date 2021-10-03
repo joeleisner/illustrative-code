@@ -1,8 +1,12 @@
 // Offline page styles
 
-i {
+#offline .icon {
     display: block !important;
     text-align: center;
+    width: 10em;
+    height: 10em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 ul {

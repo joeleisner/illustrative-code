@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "name": "illustrative-code",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Illustrations made with code",
   "repository": {
     "type": "git",
@@ -32,23 +32,36 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.26.13",
+    "css-loader": "^6.3.0",
     "cssnano": "^5.0.7",
     "eslint": "^7.32.0",
     "fibers": "^5.0.0",
     "gulp": "^4.0.2",
+    "gulp-filter": "^7.0.0",
+    "gulp-html-prettify": "^0.0.1",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-image-resize": "^0.13.1",
     "gulp-imagemin": "^8.0.0",
     "gulp-postcss": "^9.0.0",
-    "gulp-pug": "^5.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.0.0",
     "jstransformer-markdown-it": "^2.1.0",
+    "markdown-loader": "^6.0.0",
+    "marked": "^3.0.4",
+    "plugin-error": "^1.0.1",
+    "postcss": "^8.3.8",
+    "postcss-loader": "^6.1.1",
     "pre-commit": "^1.2.2",
+    "raw-loader": "^4.0.2",
     "sass": "^1.29.0",
+    "sass-loader": "^12.1.0",
     "terser-webpack-plugin": "^5.0.3",
+    "through2": "^4.0.2",
+    "vinyl-contents": "^1.0.0",
     "vinyl-named-with-path": "^1.0.0",
     "webpack": "^5.4.0",
-    "webpack-stream": "^6.1.0"
+    "webpack-cli": "^4.8.0",
+    "webpack-stream": "^7.0.0"
   },
   "browserslist": [
     "defaults and last 2 versions",
@@ -57,6 +70,7 @@
     "not OperaMini all"
   ],
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "js-cookie": "^3.0.0"
   }
 }

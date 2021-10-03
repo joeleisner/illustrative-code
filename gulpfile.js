@@ -2,10 +2,13 @@ import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
 import cssnano from 'cssnano';
 import fiber from 'fibers';
+import filter from 'gulp-filter';
 import fs from 'fs';
 import gulp from 'gulp';
-import gulpPug from 'gulp-pug';
 import gulpSass from 'gulp-sass';
+import htmlmin from 'gulp-htmlmin';
+import htmlprettify from 'gulp-html-prettify';
+import { jsToHTML } from './shared/plugins.cjs';
 import imagemin from 'gulp-imagemin';
 import imageResize from 'gulp-image-resize';
 import named from 'vinyl-named-with-path';
@@ -14,7 +17,10 @@ import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import sassCompiler from 'sass';
 import webpack from 'webpack';
-import webpackConfig from './webpack.config.js';
+import {
+    html as htmlConfig,
+    js as jsConfig
+} from './webpack.config.js';
 import webpackStream from 'webpack-stream';
 
 const transpiler = gulpSass(sassCompiler);
@@ -24,165 +30,95 @@ const MODE = NODE_ENV || 'development';
 const inDevelopment = MODE === 'development';
 const inProduction = MODE === 'production';
 
-// Optimize images
-export async function optimizeImages() {
+// Define the images source file blobs
+const IMAGE_FILES = 'images/{*.jpg,thumbnail.png}';
+
+// Optimize and resize images
+export async function img(done) {
     const { build_dir } = await import('./config.js');
 
     const verbose = inDevelopment;
 
-    return gulp.src([
-        'images/**/*',
-        '!images/icon.png',
-        '!images/icon.svg'
-    ])
+    gulp.src(IMAGE_FILES)
         .pipe(imagemin({ verbose }))
-        .pipe(gulp.dest(build_dir + '/images'))
-        .pipe(browserSync.stream());
-}
+        .pipe(gulp.dest(build_dir + '/images'));
 
-// Resize images
-export async function resizeImages() {
-    const { build_dir } = await import('./config.js');
+    // Create a filter for only *.jpg images
+    const jpgs = filter(['*.jpg']);
 
-    const verbose = inDevelopment;
-
-    return gulp.src('images/**/*.jpg')
+    gulp.src(IMAGE_FILES)
+        .pipe(jpgs)
+        .pipe(imagemin({ verbose }))
         .pipe(imageResize({
             width: 60,
             height: 60
         }))
-        .pipe(imagemin({ verbose }))
         .pipe(rename({ suffix: '.tiny' }))
         .pipe(gulp.dest(build_dir + '/images'))
         .pipe(browserSync.stream());
+
+    return done();
 }
 
-// Optimize and resize images
-export const img = gulp.parallel(optimizeImages, resizeImages);
+// Define the HTML source file globs
+const JS_FILES = [
+    '{!build,projects}/**/project.js',
+    '{service-worker,site}.js'
+];
 
-// Define a generic JS task
-async function jsTask({ src, dest }) {
+// Transpile JS
+export async function js() {
     const { build_dir } = await import('./config.js');
 
     const mode = MODE;
-    const options = Object.assign({ mode }, webpackConfig);
+    const options = Object.assign({ mode }, jsConfig);
 
-    return gulp.src(src)
+    return gulp.src(JS_FILES)
         .pipe(named())
         .pipe(webpackStream(options, webpack))
-        .pipe(gulp.dest(dest ? build_dir + '/' + dest : build_dir))
+        .pipe(gulp.dest(build_dir))
         .pipe(browserSync.stream());
 }
 
-// Transpile site JS
-export function siteJs() {
-    return jsTask({
-        src: [
-            'service-worker.js',
-            'site.js'
-        ]
-    });
-}
+// Define the HTML source file globs
+const HTML_FILES = [
+    '{offline,projects}/**/index.js',
+    'index.js'
+];
 
-// Transpile the offline page JS
-export function offlineJs() {
-    return jsTask({
-        src: 'offline/offline.js',
-        dest: 'offline'
-    });
-}
+// Transpile JS to HTML
+export async function html() {
+    const { build_dir } = await import('./config.js');
 
-// Transpile project JS
-export function projectJs() {
-    return jsTask({
-        src: 'projects/**/project.js',
-        dest: 'projects'
-    });
-}
-
-// Transpile JS
-const js = gulp.parallel(siteJs, offlineJs, projectJs);
-
-// Define a generic PUG to HTML task
-async function pugTask({ src, dest }) {
-    const pretty = inDevelopment;
-
-    const config = await import('./config.js');
-
-    const data = { config };
-
-    return gulp.src(src)
-        .pipe(gulpPug({ data, pretty }))
-        .pipe(gulp.dest(dest ? config.build_dir + '/' + dest : config.build_dir))
+    return gulp.src(HTML_FILES)
+        .pipe(named())
+        .pipe(webpackStream(htmlConfig, webpack))
+        .pipe(jsToHTML())
+        .pipe(inProduction ? htmlmin({
+            collapseWhitespace: true,
+            removeComments: true
+        }) : htmlprettify())
+        .pipe(gulp.dest(build_dir))
         .pipe(browserSync.stream());
 }
 
-// Transpile the homepage
-export function homePug() {
-    return pugTask({
-        src: 'index.pug'
-    });
-}
+// Define the SCSS source file globs
+const SCSS_FILES = '{offline,projects}/**/*.scss';
 
-// Transpile the offline page
-export function offlinePug() {
-    return pugTask({
-        src: 'offline/index.pug',
-        dest: 'offline'
-    });
-}
-
-// Transpile the project pages
-export function projectPug() {
-    return pugTask({
-        src: 'projects/**/index.pug',
-        dest: 'projects'
-    });
-}
-
-// Turn PUG into HTML
-export const pug = gulp.parallel(homePug, offlinePug, projectPug);
-
-// Define a generic SASS to CSS task
-async function sassTask({ src, dest }) {
+// Transpile the SCSS into CSS
+export async function scss() {
     const { build_dir } = await import('./config.js');
 
     let plugins = [autoprefixer];
 
     if (inProduction) plugins.push(cssnano);
 
-    return gulp.src(src)
+    return gulp.src(SCSS_FILES)
         .pipe(transpiler({ fiber }))
         .pipe(postcss(plugins))
-        .pipe(gulp.dest(dest ? build_dir + '/' + dest : build_dir))
+        .pipe(gulp.dest(build_dir))
         .pipe(browserSync.stream());
 }
-
-// Turn site SASS into CSS
-export function siteSass() {
-    return sassTask({
-        src: 'site.scss'
-    });
-}
-
-// Turn the offline SASS into CSS
-export function offlineSass() {
-    return sassTask({
-        src: 'offline/offline.scss',
-        dest: 'offline'
-    });
-}
-
-// Turn project SASS into CSS
-export function projectSass() {
-    return sassTask({
-        src: 'projects/**/project.scss',
-        dest: 'projects'
-    });
-}
-
-// Turn SASS into CSS
-export const sass = gulp.parallel(siteSass, offlineSass, projectSass);
 
 // Serve the "build" directory on localhost
 export async function serve() {
@@ -203,24 +139,22 @@ export async function serve() {
     });
 }
 
-// Generat the favicon
-export async function favicons() {
-    const { icons } = await import('./config.js');
-    const { favicon, dest } = icons;
-
-    return gulp.src(favicon.src)
-        .pipe(gulp.dest(dest));
-}
+// Define the icon source file globs
+const ICON_FILES = 'images/icon.*';
 
 // Generate the web app icons
 export async function icons(done) {
     const verbose = inDevelopment;
     const { icons } = await import('./config.js');
     const {
+        favicon,
         src,
         variants,
         dest
     } = icons;
+
+    gulp.src(favicon.src)
+        .pipe(gulp.dest(dest));
 
     variants.forEach(({ name, size }) => {
         gulp.src(src)
@@ -255,49 +189,38 @@ export async function manifest(done) {
 // Watch for source file changes
 export function watch() {
     // Images
-    gulp.watch([
-        'images/**/*',
-        '!images/icon.png',
-        '!images/icon.svg'
-    ], img);
+    gulp.watch(IMAGE_FILES, img);
     // JS
     gulp.watch([
-        'service-worker.js',
-        'site.js',
-        '{components,shared}/**/*.js'
-    ], siteJs);
-    gulp.watch('offline/index.js', offlineJs);
-    gulp.watch('{projects,shared}/**/*.js', projectJs);
-    // Pug
-    gulp.watch([
+        'components/**/index.js',
         'config.js',
-        'index.pug',
-        '{components,projects,shared}/**/*.{md,pug}'
-    ], pug);
-    gulp.watch('offline/index.pug', offlinePug);
+        ...JS_FILES
+    ], js);
+    // HTML
+    gulp.watch([
+        'components/**/{_index.scss,html.js,*.md,*.svg}',
+        'projects/**/*.md',
+        'config.js',
+        'shared/html.js',
+        'site.scss',
+        ...HTML_FILES
+    ], html);
     // SCSS
     gulp.watch([
-        'site.scss',
-        '{components,shared}/**/*.scss'
-    ], siteSass);
-    gulp.watch('offline/index.scss', offlineSass);
-    gulp.watch('{projects,shared}/**/*.scss', projectSass);
-    // Favicons
-    gulp.watch([
-        'config.js',
-        'images/icon.svg'
-    ], favicons);
+        '{components,shared}/**/*.scss',
+        SCSS_FILES
+    ], scss);
     // Icons
     gulp.watch([
         'config.js',
-        'images/icon.png'
+        ICON_FILES
     ], icons);
     // Manifest
     gulp.watch('config.js', manifest);
 }
 
 // Build all assets
-export const build = gulp.series(gulp.parallel(img, js, pug, sass), favicons, icons, manifest);
+export const build = gulp.series(gulp.parallel(img, js, html, scss), icons, manifest);
 
 // Build all assets, serve the "build" directory, and watch for changes
 export const develop = gulp.series(build, gulp.parallel(serve, watch));

@@ -92,7 +92,7 @@ $box-shadow--sm: 0px 0.5rem 1rem 0px var(--box-shadow-color);
             --background-color: var(--border-color);
         }
 
-        &:before {
+        svg {
             @include media.breakpoint {
                 margin-right: 0.5rem;
             }
@@ -135,6 +135,13 @@ $box-shadow--sm: 0px 0.5rem 1rem 0px var(--box-shadow-color);
         @include style.screen-reader--only;
         @include media.breakpoint {
             @include style.screen-reader--restore;
+        }
+    }
+
+    &__toggle {
+        &--light .icon:nth-child(2),
+        &--dark .icon:nth-child(1) {
+            display: none;
         }
     }
 }
