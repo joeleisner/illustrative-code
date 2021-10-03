@@ -21,7 +21,7 @@ const nav = [
 const navShadow = false;
 
 const message = html`
-    ${ heartBrokenIcon }
+    ${ Icon({ icon: heartBrokenIcon }) }
     <h1>No internet connection</h1>
     <p>This page isn't available offline.</p>
 `;
