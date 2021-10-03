@@ -16,7 +16,6 @@ const OFFLINE_ASSETS = {
 const PRECACHE_URLS = [
     'index.html',
     ...Object.values(OFFLINE_ASSETS),
-    'site.css',
     'site.js'
 ];
 

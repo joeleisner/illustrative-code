@@ -83,6 +83,25 @@ export function Link({ rel = 'stylesheet', ...attributes }) {
     `;
 }
 
+// Generates a link or style tag with the given attributes
+export function Style(style) {
+    if (typeof style === 'string') style = {
+        rel: 'preload',
+        href: style,
+        as: 'style',
+        media: 'screen',
+        onload: 'this.onload=null;this.rel=\'stylesheet\''
+    };
+
+    if (style.inline) return html`
+        <style>
+            ${ style.href }
+        </style>
+    `;
+
+    return Link(style);
+}
+
 // Generates a Font Awesome icon tag with the given attributes
 export function Icon({ style = 'solid', icon, text, ...attributes }) {
     const styles = {
@@ -106,7 +125,17 @@ export function Icon({ style = 'solid', icon, text, ...attributes }) {
 }
 
 // Generates a script tag with the given attributes
-export function Script({ src, ...attributes }) {
+export function Script(script) {
+    if (typeof script === 'string') script = { src: script, defer: true };
+
+    const { inline, src, ...attributes } = script;
+
+    if (inline) return html`
+        <script>
+            ${ src }
+        </script>
+    `;
+
     return html`
         <script src="${ src }" ${ attributes }></script>
     `;
@@ -125,28 +154,11 @@ export function Document({
     meta = [
         { charset: 'UTF-8' },
         {
-            'http-equiv': 'x-ua-compatible',
-            content: 'ie=edge'
-        },
-        {
             name: 'viewport',
             content: 'width=device-width, initial-scale=1.0'
         },
         ...meta
     ];
-
-    // Append the styles to the links array
-    if (styles.length) {
-        links = [
-            ...links,
-            ...styles.map(style => ({ href: style, media: 'screen' }))
-        ];
-    }
-
-    // Format the scripts array
-    if (scripts.length) {
-        scripts = scripts.map(script => ({ src: script, defer: true }));
-    }
 
     return html`
         <!DOCTYPE html>
@@ -158,6 +170,8 @@ export function Document({
             ${ meta.map(Meta) }
             <!-- Links -->
             ${ links.map(Link) }
+            <!-- Styles -->
+            ${ styles.map(Style) }
         </head>
         <body>
             ${ body }
@@ -270,6 +284,8 @@ export function generateIconLinks() {
     ];
 }
 
+import siteStyles from '../site.scss';
+
 // Render the nav component
 import { Nav } from '../components/nav/html.js';
 
@@ -305,7 +321,8 @@ export function Base({
 
     // Add the site styles
     styles = [
-        config.root + 'site.css',
+        { href: siteStyles.toString(), inline: true },
+        'https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap',
         ...styles
     ];
 
@@ -442,9 +459,7 @@ export function Project({
     const image = `${ config.url }images/${ slug(date, '/') }.jpg`;
 
     // Add the project styles
-    const styles = [
-        'project.css'
-    ];
+    const styles = [ 'project.css' ];
 
     // Define the nav
     const nav = [

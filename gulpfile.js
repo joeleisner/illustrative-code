@@ -103,10 +103,7 @@ export async function html() {
 }
 
 // Define the SCSS source file globs
-const SCSS_FILES = [
-    '{offline,projects}/**/*.scss',
-    'site.scss'
-];
+const SCSS_FILES = '{offline,projects}/**/*.scss';
 
 // Transpile the SCSS into CSS
 export async function scss() {
@@ -201,15 +198,16 @@ export function watch() {
     ], js);
     // HTML
     gulp.watch([
-        'components/**/html.js',
+        'components/**/{_index.scss,html.js}',
         'config.js',
         'shared/html.js',
+        'site.scss',
         ...HTML_FILES
     ], html);
     // SCSS
     gulp.watch([
         '{components,shared}/**/*.scss',
-        ...SCSS_FILES
+        SCSS_FILES
     ], scss);
     // Icons
     gulp.watch([

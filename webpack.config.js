@@ -1,3 +1,5 @@
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 import marked from 'marked';
 import TerserPlugin from 'terser-webpack-plugin';
 
@@ -22,6 +24,24 @@ export const html = {
                             renderer
                         }
                     }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    autoprefixer(),
+                                    cssnano()
+                                ]
+                            }
+                        }
+                    },
+                    'sass-loader'
                 ]
             }
         ]
