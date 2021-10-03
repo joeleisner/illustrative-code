@@ -44,6 +44,4 @@ const main = html`
     }) }
 `;
 
-const scripts = [ root + 'offline/offline.js' ];
-
-export default Base({ title, styles, nav, navShadow, main, scripts });
+export default Base({ title, styles, nav, navShadow, main });

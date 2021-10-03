@@ -62,7 +62,7 @@ export async function img(done) {
 
 // Define the HTML source file globs
 const JS_FILES = [
-    '{offline,projects}/**/{offline,project}.js',
+    '{!build,projects}/**/project.js',
     '{service-worker,site}.js'
 ];
 
