@@ -1,0 +1,144 @@
+// Skull styles
+
+@use "sass:math";
+@use "../../../../shared/media";
+@use "../../../../shared/style";
+
+// Colors
+
+$bone--dark: style.color("white");
+$bone--light: style.darken("white", 10%);
+
+$hole: style.color("slate");
+
+// Skull
+
+$size: 300px;
+
+#skull {
+    --bone: #{$bone--light};
+    --hole: #{$hole};
+    position: relative;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background-color: var(--bone);
+
+    @include media.theme("light") {
+        --bone: #{$bone--light};
+    }
+
+    @include media.theme("dark") {
+        --bone: #{$bone--dark};
+    }
+
+    // Eyes
+
+    $eye__width: math.div($size, 3);
+    $eye__height: math.div($size, 3.5);
+    $eye__rotation: 30deg;
+    $eye__offset--horizontal: math.div($size, 10);
+    $eye__offset--vertical: math.div($size, 4);
+
+    .eye {
+        position: absolute;
+        width: $eye__width;
+        height: $eye__height;
+        border-radius: 50%;
+        background-color: var(--hole);
+
+        &.left {
+            left: $eye__offset--horizontal;
+            transform: rotate(-$eye__rotation)
+        }
+
+        &.left,
+        &.right {
+            bottom: $eye__offset--vertical;
+        }
+
+        &.right {
+            right: $eye__offset--horizontal;
+            transform: rotate($eye__rotation);
+        }
+    }
+
+    // Nose
+
+    $nose__width: math.div($size, 3);
+    $nose__height: math.floor(math.div($size, 3.33));
+    $nose__offset: math.div($size, 1.5);
+
+    .nose {
+        position: relative;
+        margin-top: $nose__offset;
+        left: 50%;
+        width: $nose__width;
+        height: $nose__height;
+        transform: translateX(-50%) rotateZ(180deg) rotateY(45deg);
+        z-index: 2;
+
+        $nose__half--width: math.div($nose__width, 2);
+        $nose__half--height: math.div($size, 3.75);
+
+        &:before,
+        &:after {
+            position: absolute;
+            content: "";
+            left: $nose__half--width;
+            top: 0;
+            width: $nose__half--width;
+            height: $nose__half--height;
+            background: var(--hole);
+            border-radius: $nose__half--width $nose__half--width 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        &:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+    }
+
+    // Cheeks
+
+    $cheek__size: math.div($size, 3);
+    $cheek__offset: math.div($size, 10);
+
+    .cheek {
+        position: absolute;
+        width: $cheek__size;
+        height: $cheek__size;
+        border-radius: 50%;
+        background-color: var(--bone);
+
+        &.left,
+        &.right {
+            left: $cheek__offset;
+            bottom: -$cheek__offset;
+        }
+
+        &.right {
+            left: unset;
+            right: $cheek__offset;
+        }
+    }
+
+    // Maxilla
+
+    $maxilla__width: math.div($size, 2);
+    $maxilla__height: math.div($maxilla__width, 2);
+    $maxilla__offset: $cheek__offset * 2;
+
+    .maxilla {
+        position: absolute;
+        left: 50%;
+        bottom: -$maxilla__offset;
+        width: $maxilla__width;
+        height: $maxilla__height;
+        background-color: var(--bone);
+        transform: translateX(-50%);
+    }
+}
