@@ -7,6 +7,10 @@ import { Card } from './components/card/html.js';
 
 const projects = [
     {
+        path: '2021/10/17',
+        title: 'Ghost'
+    },
+    {
         path: '2021/10/7',
         title: 'Skull'
     },

@@ -1,0 +1,69 @@
+// Ghost styles
+
+@use "sass:math";
+
+// Ghost
+
+$width: 300px;
+$height: math.ceil($width * 1.333);
+$border-radius: math.div($width, 2);
+
+#ghost {
+    position: relative;
+    width: $width;
+    height: $height;
+    background-color: var(--color);
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+
+    // Eyes
+
+    $eye__size: math.div($width, 5);
+    $eye__offset--vertical: math.div($width, 2);
+    $eye__offset--horizontal: math.div($width, 5);
+
+    @keyframes blink {
+        0%, 100% {
+            height: 0;
+        }
+        5%, 95% {
+            height: $eye__size;
+        }
+    }
+
+    .eye {
+        position: absolute;
+        top: $eye__offset--vertical;
+        width: $eye__size;
+        height: $eye__size;
+        border-radius: 50%;
+        background-color: var(--background-color);
+        animation: blink 5s infinite alternate;
+        transform: translateY(-50%);
+
+        &.left {
+            left: $eye__offset--horizontal;
+        }
+
+        &.right {
+            right: $eye__offset--horizontal;
+        }
+    }
+
+    // Wave
+
+    $wave__size: math.div($width, 10);
+    $wave__background-size: $wave__size * 2;
+
+    &:after{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-repeat: repeat;
+        height: $wave__size;
+        background-size: $wave__background-size $wave__background-size;
+        background-image: radial-gradient(circle at 50% -2px, transparent ($wave__size + 1px), var(--background-color) ($wave__size + 2px));
+    }
+}
