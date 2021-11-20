@@ -1,6 +1,6 @@
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-import marked from 'marked';
+import { marked } from 'marked';
 import TerserPlugin from 'terser-webpack-plugin';
 
 const renderer = new marked.Renderer();
