@@ -34,7 +34,6 @@
     "css-loader": "^6.3.0",
     "cssnano": "^5.0.7",
     "eslint": "^8.2.0",
-    "fibers": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-filter": "^7.0.0",
     "gulp-html-prettify": "^0.0.1",
