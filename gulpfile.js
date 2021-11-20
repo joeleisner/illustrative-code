@@ -1,7 +1,6 @@
 import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
 import cssnano from 'cssnano';
-import fiber from 'fibers';
 import filter from 'gulp-filter';
 import fs from 'fs';
 import gulp from 'gulp';
@@ -114,7 +113,7 @@ export async function scss() {
     if (inProduction) plugins.push(cssnano);
 
     return gulp.src(SCSS_FILES)
-        .pipe(transpiler({ fiber }))
+        .pipe(transpiler())
         .pipe(postcss(plugins))
         .pipe(gulp.dest(build_dir))
         .pipe(browserSync.stream());
