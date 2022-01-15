@@ -45,7 +45,7 @@
     "gulp-sass": "^5.0.0",
     "jstransformer-markdown-it": "^2.1.0",
     "markdown-loader": "^6.0.0",
-    "marked": "^4.0.4",
+    "marked": "^4.0.10",
     "plugin-error": "^1.0.1",
     "postcss": "^8.3.8",
     "postcss-loader": "^6.1.1",
