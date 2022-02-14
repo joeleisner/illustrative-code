@@ -360,7 +360,7 @@ export function Base({
 }
 
 // Homepage icons
-import homeIcon from '@fortawesome/fontawesome-free/svgs/solid/home.svg';
+import houseIcon from '@fortawesome/fontawesome-free/svgs/solid/house.svg';
 import twitterIcon from '@fortawesome/fontawesome-free/svgs/brands/twitter.svg';
 import instagramIcon from '@fortawesome/fontawesome-free/svgs/brands/instagram.svg';
 import codeBranchIcon from '@fortawesome/fontawesome-free/svgs/solid/code-branch.svg';
@@ -399,7 +399,7 @@ export function Home({
         {
             to: 'http://joeleisner.com',
             title: 'Joel Eisner\'s homepage',
-            icon: homeIcon,
+            icon: houseIcon,
             text: 'Home'
         },
         {

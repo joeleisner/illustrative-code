@@ -1,7 +1,7 @@
 import { root } from '../config.js';
 import chevronLeftIcon from '@fortawesome/fontawesome-free/svgs/solid/chevron-left.svg';
 import { themeToggle, html, Icon, Base } from '../shared/html.js';
-import heartBrokenIcon from '@fortawesome/fontawesome-free/svgs/solid/heart-broken.svg';
+import heartCrackIcon from '@fortawesome/fontawesome-free/svgs/solid/heart-crack.svg';
 import { Panel } from '../components/panel/html.js';
 
 const title = 'Illustrative Code is offline';
@@ -21,7 +21,7 @@ const nav = [
 const navShadow = false;
 
 const message = html`
-    ${ Icon({ icon: heartBrokenIcon }) }
+    ${ Icon({ icon: heartCrackIcon }) }
     <h1>No internet connection</h1>
     <p>This page isn't available offline.</p>
 `;
