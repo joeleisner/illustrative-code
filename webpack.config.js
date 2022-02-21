@@ -2,7 +2,6 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import fs from 'fs';
 import { marked } from 'marked';
-import TerserPlugin from 'terser-webpack-plugin';
 
 const renderer = new marked.Renderer();
 
@@ -47,9 +46,6 @@ export const html = {
             }
         ]
     },
-    optimization: {
-        minimizer: [ new TerserPlugin() ]
-    },
     output: {
         library: {
             type: 'commonjs2'
@@ -74,9 +70,6 @@ export const js = {
                 ]
             }
         ]
-    },
-    optimization: {
-        minimizer: [ new TerserPlugin() ]
     },
     plugins: [
         new webpack.DefinePlugin({
