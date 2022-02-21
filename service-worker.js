@@ -1,6 +1,5 @@
 // Names of caches
 const NAME = 'ic';
-const VERSION = '{{ VERSION }}';
 const CACHES = {
     PRE: NAME + '-precache-' + VERSION,
     RUN: NAME + '-runtime-' + VERSION

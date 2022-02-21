@@ -6,8 +6,6 @@ import TerserPlugin from 'terser-webpack-plugin';
 
 const renderer = new marked.Renderer();
 
-const { version } = JSON.parse(fs.readFileSync('./package.json'));
-
 export const html = {
     mode: 'production',
     module: {
@@ -60,6 +58,9 @@ export const html = {
     stats: 'minimal'
 };
 
+import webpack from 'webpack';
+const { version } = JSON.parse(fs.readFileSync('./package.json'));
+
 export const js = {
     module: {
         rules: [
@@ -69,13 +70,6 @@ export const js = {
                     {
                         loader:  'babel-loader',
                         options: { babelrc: true }
-                    },
-                    {
-                        loader: 'string-replace-loader',
-                        options: {
-                            search: '{{ VERSION }}',
-                            replace: version
-                        }
                     }
                 ]
             }
@@ -83,5 +77,10 @@ export const js = {
     },
     optimization: {
         minimizer: [ new TerserPlugin() ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            VERSION: JSON.stringify(version)
+        })
+    ]
 };
