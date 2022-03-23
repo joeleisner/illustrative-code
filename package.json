@@ -14,7 +14,7 @@
     "develop": "NODE_ENV=development npx gulp develop",
     "dev": "npm run develop",
     "lint": "npx eslint --cache --ignore-path .gitignore ./components/**/*.js ./*.js",
-    "serve": "npx gulp serve",
+    "serve": "NODE_ENV=production npx gulp serve",
     "start": "npm run develop"
   },
   "pre-commit": [

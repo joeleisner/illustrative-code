@@ -128,12 +128,14 @@ export async function serve() {
     routes[root] = output_dir;
 
     browserSync.init({
+        ghostMode: inDevelopment,
         notify: false,
         open: false,
         server: {
             baseDir: output_dir,
             routes
         },
+        snippet: inDevelopment,
         startPath: root
     });
 }
