@@ -56,7 +56,7 @@ export const html = {
 
 import webpack from 'webpack';
 const { version } = JSON.parse(fs.readFileSync('./package.json'));
-import * as config from './config.js';
+import { root } from './config.js';
 
 export const js = {
     module: {
@@ -75,7 +75,7 @@ export const js = {
     plugins: [
         new webpack.DefinePlugin({
             VERSION: JSON.stringify(version),
-            ROOT: JSON.stringify(config.root)
+            ROOT: JSON.stringify(root)
         })
     ]
 };
