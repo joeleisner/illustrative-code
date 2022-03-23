@@ -2,11 +2,8 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import fs from 'fs';
 import { marked } from 'marked';
-import TerserPlugin from 'terser-webpack-plugin';
 
 const renderer = new marked.Renderer();
-
-const { version } = JSON.parse(fs.readFileSync('./package.json'));
 
 export const html = {
     mode: 'production',
@@ -49,9 +46,6 @@ export const html = {
             }
         ]
     },
-    optimization: {
-        minimizer: [ new TerserPlugin() ]
-    },
     output: {
         library: {
             type: 'commonjs2'
@@ -59,6 +53,10 @@ export const html = {
     },
     stats: 'minimal'
 };
+
+import webpack from 'webpack';
+const { version } = JSON.parse(fs.readFileSync('./package.json'));
+import { root } from './config.js';
 
 export const js = {
     module: {
@@ -69,19 +67,15 @@ export const js = {
                     {
                         loader:  'babel-loader',
                         options: { babelrc: true }
-                    },
-                    {
-                        loader: 'string-replace-loader',
-                        options: {
-                            search: '{{ VERSION }}',
-                            replace: version
-                        }
                     }
                 ]
             }
         ]
     },
-    optimization: {
-        minimizer: [ new TerserPlugin() ]
-    }
+    plugins: [
+        new webpack.DefinePlugin({
+            VERSION: JSON.stringify(version),
+            ROOT: JSON.stringify(root)
+        })
+    ]
 };

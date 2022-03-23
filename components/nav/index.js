@@ -17,8 +17,10 @@ export class Nav {
         // ... and if it doesn't exist, do nothing else
         if (!nav) return;
 
-        // Next, attempt to grab nav controls
-        const controls = Array.from(nav.querySelectorAll('[aria-controls]'));
+        // Next, grab all clickable items from the nav...
+        const items = Array.from(nav.querySelectorAll('a, button'));
+        // ... and attempt to filter the nav controls from them
+        const controls = items.filter(item => item.hasAttribute('aria-controls'));
 
         // Next, get the panels the controls target
         const panels = (controls.length ? controls : []).map(control => {
@@ -27,11 +29,12 @@ export class Nav {
         });
 
         // Next, get the theme toggle
-        const toggle = document.getElementById('nav__toggle');
+        const toggle = items.find(item => item.id === 'nav__toggle');
 
         // Finally, store all references
         this.references = {
             nav,
+            items,
             controls,
             panels,
             toggle
@@ -189,6 +192,47 @@ export class Nav {
         this.references.panels.forEach(panel => this.setPanelShow(panel, panel === targetPanel));
     }
 
+    // Support advanced keyboard navigation
+    keyboardNavigation(event) {
+        const { key, isComposing } = event;
+        // If the keypress wasn't for navigation purposes, or the user is typing, do nothing
+        if (![
+            'Home',
+            'ArrowLeft',
+            'ArrowRight',
+            'End'
+        ].includes(key) || isComposing) return;
+
+        // Prevent the default behavior
+        event.preventDefault();
+
+        // Grab the current target...
+        const { currentTarget: target } = event;
+        // ... and the first/last items
+        const first = this.references.items[0];
+        const last = this.references.items[this.references.items.length - 1];
+
+        // If "Home" was pressed, or "ArrowRight" while on the last item, focus the first item
+        if (key === 'Home' || (key === 'ArrowRight' && target === last)) return first.focus();
+
+        // If "End" was pressed, or "ArrowLeft" while on the first item, focus the last item
+        if (key === 'End' || (key === 'ArrowLeft' && target === first)) return last.focus();
+
+        // Otherwise, find the offset...
+        const offset = key === 'ArrowRight' ? 1 : -1;
+        // ... and index of the next item,...
+        const index = this.references.items.indexOf(target) + offset;
+        // ... and focus it
+        this.references.items[index].focus();
+    }
+
+    // Bind to nav item key presses
+    itemsOnKeydown() {
+        this.references.items.forEach(item => {
+            item.addEventListener('keydown', this.keyboardNavigation.bind(this));
+        });
+    }
+
     // Bind to nav control clicks
     controlsOnClick() {
         // For each nav control,...
@@ -220,7 +264,9 @@ export class Nav {
         // ... and restore a panel's visibility if found
         this.restorePanel();
 
-        // Finally, bind to all nav control clicks...
+        // Finally, bind to items key presses,...
+        this.itemsOnKeydown();
+        // ... control clicks,...
         this.controlsOnClick();
         // ... and document scrolling
         this.documentOnScroll();

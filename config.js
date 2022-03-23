@@ -13,8 +13,8 @@ export const url = 'http://joeleisner.com/illustrative-code/';
 // The site's theme color
 export const color = '#333';
 
-// The build directory of the site
-export const build_dir = 'build';
+// The output directory of the site
+export const output_dir = 'public';
 
 // Icon information
 export const icon_type = 'png';
@@ -44,7 +44,7 @@ export const icons = {
             size,
         };
     }),
-    dest: build_dir + '/icons'
+    dest: output_dir + '/icons'
 };
 
 // The web manifest information

@@ -34,13 +34,13 @@ const IMAGE_FILES = 'images/{*.jpg,thumbnail.png}';
 
 // Optimize and resize images
 export async function img(done) {
-    const { build_dir } = await import('./config.js');
+    const { output_dir } = await import('./config.js');
 
     const verbose = inDevelopment;
 
     gulp.src(IMAGE_FILES)
         .pipe(imagemin({ verbose }))
-        .pipe(gulp.dest(build_dir + '/images'));
+        .pipe(gulp.dest(output_dir + '/images'));
 
     // Create a filter for only *.jpg images
     const jpgs = filter(['*.jpg']);
@@ -53,7 +53,7 @@ export async function img(done) {
             height: 60
         }))
         .pipe(rename({ suffix: '.tiny' }))
-        .pipe(gulp.dest(build_dir + '/images'))
+        .pipe(gulp.dest(output_dir + '/images'))
         .pipe(browserSync.stream());
 
     return done();
@@ -67,7 +67,7 @@ const JS_FILES = [
 
 // Transpile JS
 export async function js() {
-    const { build_dir } = await import('./config.js');
+    const { output_dir } = await import('./config.js');
 
     const mode = MODE;
     const options = Object.assign({ mode }, jsConfig);
@@ -75,7 +75,7 @@ export async function js() {
     return gulp.src(JS_FILES)
         .pipe(named())
         .pipe(webpackStream(options, webpack))
-        .pipe(gulp.dest(build_dir))
+        .pipe(gulp.dest(output_dir))
         .pipe(browserSync.stream());
 }
 
@@ -87,7 +87,7 @@ const HTML_FILES = [
 
 // Transpile JS to HTML
 export async function html() {
-    const { build_dir } = await import('./config.js');
+    const { output_dir } = await import('./config.js');
 
     return gulp.src(HTML_FILES)
         .pipe(named())
@@ -97,7 +97,7 @@ export async function html() {
             collapseWhitespace: true,
             removeComments: true
         }) : htmlprettify())
-        .pipe(gulp.dest(build_dir))
+        .pipe(gulp.dest(output_dir))
         .pipe(browserSync.stream());
 }
 
@@ -106,7 +106,7 @@ const SCSS_FILES = '{offline,projects}/**/*.scss';
 
 // Transpile the SCSS into CSS
 export async function scss() {
-    const { build_dir } = await import('./config.js');
+    const { output_dir } = await import('./config.js');
 
     let plugins = [autoprefixer];
 
@@ -115,25 +115,27 @@ export async function scss() {
     return gulp.src(SCSS_FILES)
         .pipe(transpiler())
         .pipe(postcss(plugins))
-        .pipe(gulp.dest(build_dir))
+        .pipe(gulp.dest(output_dir))
         .pipe(browserSync.stream());
 }
 
 // Serve the "build" directory on localhost
 export async function serve() {
-    const { build_dir, root } = await import('./config.js');
+    const { output_dir, root } = await import('./config.js');
 
     let routes = {};
 
-    routes[root] = build_dir;
+    routes[root] = output_dir;
 
     browserSync.init({
+        ghostMode: inDevelopment,
         notify: false,
         open: false,
         server: {
-            baseDir: build_dir,
+            baseDir: output_dir,
             routes
         },
+        snippet: inDevelopment,
         startPath: root
     });
 }
@@ -171,9 +173,9 @@ export async function icons(done) {
 
 // Generate the site manifest
 export async function manifest(done) {
-    const { build_dir, manifest } = await import('./config.js');
+    const { output_dir, manifest } = await import('./config.js');
 
-    const dir = path.join(process.cwd(), build_dir);
+    const dir = path.join(process.cwd(), output_dir);
 
     if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 

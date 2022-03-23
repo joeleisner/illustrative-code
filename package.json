@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "name": "illustrative-code",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "description": "Illustrations made with code",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "develop": "NODE_ENV=development npx gulp develop",
     "dev": "npm run develop",
     "lint": "npx eslint --cache --ignore-path .gitignore ./components/**/*.js ./*.js",
-    "serve": "npx gulp serve",
+    "serve": "NODE_ENV=production npx gulp serve",
     "start": "npm run develop"
   },
   "pre-commit": [
@@ -53,8 +53,6 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.29.0",
     "sass-loader": "^12.1.0",
-    "string-replace-loader": "^3.0.3",
-    "terser-webpack-plugin": "^5.0.3",
     "through2": "^4.0.2",
     "vinyl-contents": "^1.0.0",
     "vinyl-named-with-path": "^1.0.0",
