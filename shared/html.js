@@ -93,9 +93,11 @@ export function Style(style) {
         onload: 'this.onload=null;this.rel=\'stylesheet\''
     };
 
-    if (style.inline) return html`
+    const { inline, href } = style;
+
+    if (inline) return html`
         <style>
-            ${ style.href }
+            ${ href }
         </style>
     `;
 
@@ -134,7 +136,7 @@ export function Script(script) {
     const { inline, src, ...attributes } = script;
 
     if (inline) return html`
-        <script>
+        <script ${ attributes }>
             ${ src }
         </script>
     `;
