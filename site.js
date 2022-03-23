@@ -1,24 +1,10 @@
-import { root } from './config.js';
 import { Nav } from './components/nav/index.js';
 import { Card } from './components/card/index.js';
 
-// Register the service worker
-function registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) return;
+// If service workers are supported, register one
+if ('serviceWorker' in navigator) navigator.serviceWorker.register(ROOT + 'service-worker.js');
 
-    navigator.serviceWorker.register(root + 'service-worker.js');
-}
-
-// Initialize all functionality
-function initialize() {
-    document.removeEventListener('DOMContentLoaded', initialize);
-
-    registerServiceWorker();
-
-    const components = [ Nav, Card ];
-
-    components.forEach(Component => (new Component()).start());
-}
-
-// When the DOM is loaded, initialize all functionality
-document.addEventListener('DOMContentLoaded', initialize);
+// Grab the nav and card components...
+const components = [ Nav, Card ];
+// ... and start each one
+components.forEach(Component => (new Component()).start());
